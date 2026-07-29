@@ -44,6 +44,9 @@ class Settings:
     # Overrides and configurations matching Phase 2 specifications
     AI_MODEL: str = os.getenv("AI_MODEL", os.getenv("LLM_MODEL_NAME", "gpt-3.5-turbo"))
     AI_BASE_URL: str = os.getenv("AI_BASE_URL", "https://api.openai.com/v1")
+    
+    # Backend URL for internal tool and validation requests
+    BACKEND_URL: str = os.getenv("BACKEND_URL", "http://localhost:8080/api")
 
 settings = Settings()
 

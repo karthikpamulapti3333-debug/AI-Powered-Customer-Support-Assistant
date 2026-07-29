@@ -1,6 +1,7 @@
-$isFrontend = Get-NetTCPConnection -LocalPort 5173 -ErrorAction SilentlyContinue
-$isBackend = Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue
-$isAi = Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue
+$isFrontend = Get-NetTCPConnection -LocalPort 5173 -State Listen -ErrorAction SilentlyContinue
+$isBackend = Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue
+$isAi = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue
+
 
 if (-not $isAi) {
     Start-Process -FilePath "python" -ArgumentList "-m uvicorn main:app --host 0.0.0.0 --port 8000" -WorkingDirectory "$PSScriptRoot\ai-service" -WindowStyle Hidden

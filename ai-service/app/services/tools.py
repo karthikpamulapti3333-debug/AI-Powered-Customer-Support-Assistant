@@ -1,8 +1,10 @@
 import requests
 from typing import List, Dict, Any, Optional
 from app.services.vector_store import search_knowledge
+from app.config.settings import settings
 
-BACKEND_URL = "http://localhost:8080/api"
+BACKEND_URL = settings.BACKEND_URL
+
 
 def search_knowledge_base(query: str) -> List[Dict[str, Any]]:
     """Searches company knowledge base documents for relevant chunks."""

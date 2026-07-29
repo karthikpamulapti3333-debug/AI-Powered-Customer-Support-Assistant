@@ -91,6 +91,7 @@ async def delete_document(fileName: str):
 
 from fastapi import Header
 import requests
+from app.config.settings import settings
 
 @router.post("/chat", response_model=ChatResponseSchema)
 async def chat_with_ai(input_data: ChatInput, authorization: Optional[str] = Header(None)):
@@ -103,7 +104,8 @@ async def chat_with_ai(input_data: ChatInput, authorization: Optional[str] = Hea
     username = "User"
     if authorization:
         try:
-            res = requests.get("http://localhost:8080/api/auth/me", headers={"Authorization": authorization}, timeout=2)
+            res = requests.get(f"{settings.BACKEND_URL}/auth/me", headers={"Authorization": authorization}, timeout=2)
+
             if res.status_code == 200:
                 data = res.json()
                 username = data.get("username", "User")
