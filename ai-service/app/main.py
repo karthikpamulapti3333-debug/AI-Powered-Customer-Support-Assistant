@@ -27,6 +27,15 @@ app.include_router(health.router, prefix="/api/ai", tags=["Health"])
 app.include_router(predict.router, prefix="/api/ai", tags=["Predictions"])
 app.include_router(chat.router, prefix="/api/ai", tags=["Conversations"])
 
+@app.get("/")
+def root():
+    return {"status": "AI service is running"}
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
+
 @app.on_event("startup")
 async def startup_event():
     print(f"Starting {settings.PROJECT_NAME}...")
