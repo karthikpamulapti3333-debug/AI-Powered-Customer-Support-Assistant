@@ -1,0 +1,48 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_modules/
+
+# Local configuration
+.env
+.env*.local
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Java / Maven build files
+target/
+*.class
+.mvn/wrapper/maven-wrapper.jar
+.apt_generated/
+.classpath
+.project
+.settings/
+
+# Python / FastAPI files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

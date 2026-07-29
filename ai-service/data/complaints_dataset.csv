@@ -1,0 +1,401 @@
+text,category,intent,sentiment,priority,root_cause,escalation_risk,is_escalated
+I would like to request a refund for order ORD-334053 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.46,0
+I opened the package and Wireless Headphones has multiple scratches and is dented. The packaging was damaged.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.71,0
+"I tried to purchase Mechanical Keyboard and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.83,1
+The API is returning bad gateway errors repeatedly when we try to fetch our account reports.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.66,0
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.68,0
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.63,0
+I opened the package and Wireless Headphones has multiple scratches and is dented. The packaging was damaged.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.81,1
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.88,1
+The tracking number TRK58586340 is not updating at all. It just says shipment pending.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.65,0
+I would like to request a refund for order ORD-757924 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.65,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.39,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.33,0
+My transaction was declined at checkout but my bank statement shows the payment was successfully processed. Please help.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.93,1
+I would like to request a refund for order ORD-897549 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.56,0
+My password was changed without my permission. I received an alert but I did not initiate this.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.87,1
+The screen of the Wireless Headphones I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.78,1
+The screen of the Wireless Headphones I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.59,0
+Duplicate charge on my credit card statement for order ORD-203198. I see two identical charges of $1358.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.79,1
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.52,0
+"My payment of $504 for order ORD-526156 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.83,1
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.97,1
+Duplicate charge on my credit card statement for order ORD-152578. I see two identical charges of $662.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.92,1
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.57,0
+Security breach alert: my account is compromised and someone is trying to transfer my credits.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.9,1
+My password was changed without my permission. I received an alert but I did not initiate this.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,1.0,1
+I would like to request a refund for order ORD-630458 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.51,0
+I was promised a callback from a supervisor within 24 hours but no one called. Very unprofessional.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.55,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.58,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.37,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.57,0
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.73,0
+The billing amount on my invoice ORD-799330 is incorrect. I was charged $450 instead of the advertised price of $521.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.94,1
+I opened the package and MacBook Pro has multiple scratches and is dented. The packaging was damaged.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.81,1
+I am locked out of my profile and the password reset link is not arriving in my mailbox.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.37,0
+I opened the package and 4K Monitor has multiple scratches and is dented. The packaging was damaged.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.72,0
+Security breach alert: my account is compromised and someone is trying to transfer my credits.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.87,1
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.94,1
+The item Gaming Mouse arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.38,0
+Security breach alert: my account is compromised and someone is trying to transfer my credits.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.94,1
+I am getting a white screen on the mobile app. I have reinstalled it twice but the problem persists.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.66,0
+The login screen is giving a 500 internal server error when I click submit. Please fix this bug.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.8,1
+I am writing to demand a refund because the software licence key I bought does not work.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.58,0
+"My payment of $890 for order ORD-284430 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.91,1
+I am getting a white screen on the mobile app. I have reinstalled it twice but the problem persists.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.65,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.37,0
+Please cancel my order ORD-501641 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.56,0
+I noticed unauthorized transactions on my bank card from your store. Someone hacked my account.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.91,1
+I received a phishing email that seems to have leaked my account information. Please lock my profile.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.86,1
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.78,1
+"My payment of $1336 for order ORD-242291 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.79,1
+The API is returning bad gateway errors repeatedly when we try to fetch our account reports.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.71,0
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.72,0
+I opened the package and Wireless Headphones has multiple scratches and is dented. The packaging was damaged.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.77,1
+Please cancel my order ORD-706794 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.47,0
+The screen of the Samsung Galaxy S24 I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.78,1
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.63,0
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.62,0
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.77,1
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.66,0
+The screen of the Wireless Headphones I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.67,0
+The product quality is extremely poor. The seams are ripped and the fabric is torn.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.72,0
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.69,0
+The tracking number TRK49761527 is not updating at all. It just says shipment pending.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.59,0
+Duplicate charge on my credit card statement for order ORD-387636. I see two identical charges of $1113.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.85,1
+My transaction was declined at checkout but my bank statement shows the payment was successfully processed. Please help.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.77,1
+I am writing to demand a refund because the software licence key I bought does not work.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.65,0
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.62,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.88,1
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.61,0
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.34,0
+I paid for express shipping but my package ORD-162535 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.69,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.97,1
+"My payment of $488 for order ORD-976566 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.88,1
+I am locked out of my profile and the password reset link is not arriving in my mailbox.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.36,0
+Please cancel my order ORD-827369 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.47,0
+I cannot log in to my account. It keeps saying invalid credentials but I am using the correct password.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.4,0
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.6,0
+Duplicate charge on my credit card statement for order ORD-844261. I see two identical charges of $1266.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.79,1
+I am writing to demand a refund because the software licence key I bought does not work.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.53,0
+Your company has the worst customer support. No one replies to emails and phone support is disconnected.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.68,0
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.57,0
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.7,0
+Received the wrong item. I ordered a blue 4K Monitor but received a red one instead.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.73,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.55,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.68,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.73,0
+I am locked out of my profile and the password reset link is not arriving in my mailbox.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.36,0
+The billing amount on my invoice ORD-551607 is incorrect. I was charged $754 instead of the advertised price of $777.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.79,1
+My order ORD-749813 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.6,0
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.43,0
+Security breach alert: my account is compromised and someone is trying to transfer my credits.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.93,1
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.76,1
+My transaction was declined at checkout but my bank statement shows the payment was successfully processed. Please help.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.87,1
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.7,0
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.62,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.47,0
+My email address was changed to a random Outlook address that I do not own. This is a severe hack!,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.92,1
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.37,0
+Parts are missing from the package. I cannot assemble the Bluetooth Speaker without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.84,1
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.44,0
+My email address was changed to a random Outlook address that I do not own. This is a severe hack!,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.92,1
+Your company has the worst customer support. No one replies to emails and phone support is disconnected.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.54,0
+I am writing to demand a refund because the software licence key I bought does not work.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.56,0
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.62,0
+The tracking number TRK27690330 is not updating at all. It just says shipment pending.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.71,0
+Received the wrong item. I ordered a blue Mechanical Keyboard but received a red one instead.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.8,1
+Your company has the worst customer support. No one replies to emails and phone support is disconnected.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.66,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.48,0
+I would like to request a refund for order ORD-255539 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.56,0
+I am getting a white screen on the mobile app. I have reinstalled it twice but the problem persists.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.62,0
+The product quality is extremely poor. The seams are ripped and the fabric is torn.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.71,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.62,0
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.79,1
+Security breach alert: my account is compromised and someone is trying to transfer my credits.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.88,1
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.59,0
+My transaction was declined at checkout but my bank statement shows the payment was successfully processed. Please help.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.79,1
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.63,0
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.75,1
+Duplicate charge on my credit card statement for order ORD-564637. I see two identical charges of $187.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.9,1
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.65,0
+"My payment of $438 for order ORD-321494 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.85,1
+My password was changed without my permission. I received an alert but I did not initiate this.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.86,1
+I have been charged for a subscription renewal that I cancelled last week. I want my money back.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.77,1
+The billing amount on my invoice ORD-582446 is incorrect. I was charged $371 instead of the advertised price of $1275.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.87,1
+I am writing to demand a refund because the software licence key I bought does not work.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.56,0
+The item MacBook Pro arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.68,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.75,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.65,0
+The billing amount on my invoice ORD-425486 is incorrect. I was charged $1059 instead of the advertised price of $161.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.77,1
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.58,0
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.7,0
+My order ORD-560767 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.7,0
+Duplicate charge on my credit card statement for order ORD-169113. I see two identical charges of $1345.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.92,1
+I paid for express shipping but my package ORD-795847 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.63,0
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.55,0
+The billing amount on my invoice ORD-324597 is incorrect. I was charged $652 instead of the advertised price of $379.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.77,1
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.48,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.7,0
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.65,0
+My email address was changed to a random Outlook address that I do not own. This is a severe hack!,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.95,1
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.78,1
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.65,0
+The product quality is extremely poor. The seams are ripped and the fabric is torn.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.68,0
+The billing amount on my invoice ORD-895702 is incorrect. I was charged $987 instead of the advertised price of $294.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.79,1
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.6,0
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.5,0
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.7,0
+I have been charged for a subscription renewal that I cancelled last week. I want my money back.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.76,1
+Parts are missing from the package. I cannot assemble the Gaming Mouse without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.81,1
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.59,0
+The screen of the 4K Monitor I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.78,1
+I cannot log in to my account. It keeps saying invalid credentials but I am using the correct password.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.39,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.87,1
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.69,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.74,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.54,0
+My order ORD-484123 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.64,0
+The API is returning bad gateway errors repeatedly when we try to fetch our account reports.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.66,0
+I would like to request a refund for order ORD-642895 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.59,0
+Received the wrong item. I ordered a blue Samsung Galaxy S24 but received a red one instead.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.74,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.59,0
+I paid for express shipping but my package ORD-227257 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.66,0
+I am getting a white screen on the mobile app. I have reinstalled it twice but the problem persists.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.7,0
+I received a phishing email that seems to have leaked my account information. Please lock my profile.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.92,1
+The tracking number TRK50818905 is not updating at all. It just says shipment pending.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.61,0
+The item Samsung Galaxy S24 arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.68,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.44,0
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.71,0
+I have been charged for a subscription renewal that I cancelled last week. I want my money back.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.76,1
+"I tried to purchase Bluetooth Speaker and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.92,1
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.62,0
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.66,0
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.79,1
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.63,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.38,0
+The item 4K Monitor arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+Please cancel my order ORD-491326 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.55,0
+"My payment of $99 for order ORD-848255 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.78,1
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.71,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.39,0
+Parts are missing from the package. I cannot assemble the MacBook Pro without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.7,0
+Please cancel my order ORD-428930 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.6,0
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.58,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.66,0
+The item Bluetooth Speaker arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+My account user_397 is locked due to too many login attempts. Please unlock it.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.36,0
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.59,0
+My order ORD-350905 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.57,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.7,0
+The item iPhone 15 arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.82,1
+"I tried to purchase 4K Monitor and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.75,1
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.47,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.7,0
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.57,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.74,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.39,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.59,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.72,0
+Parts are missing from the package. I cannot assemble the Bluetooth Speaker without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.66,0
+Received the wrong item. I ordered a blue Gaming Mouse but received a red one instead.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.61,0
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.58,0
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.6,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.87,1
+My email address was changed to a random Outlook address that I do not own. This is a severe hack!,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.96,1
+My password was changed without my permission. I received an alert but I did not initiate this.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.98,1
+"I tried to purchase iPhone 15 and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.83,1
+Received the wrong item. I ordered a blue Mechanical Keyboard but received a red one instead.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.78,1
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.79,1
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.71,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.77,1
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.34,0
+I am writing to demand a refund because the software licence key I bought does not work.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.57,0
+Please cancel my order ORD-685997 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.49,0
+Parts are missing from the package. I cannot assemble the Wireless Headphones without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.71,0
+I was promised a callback from a supervisor within 24 hours but no one called. Very unprofessional.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.7,0
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.61,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,1.0,1
+The API is returning bad gateway errors repeatedly when we try to fetch our account reports.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.74,0
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.67,0
+The screen of the Wireless Headphones I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.78,1
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.61,0
+My account user_252 is locked due to too many login attempts. Please unlock it.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.34,0
+I cannot log in to my account. It keeps saying invalid credentials but I am using the correct password.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.35,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.58,0
+My order ORD-776234 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.59,0
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.5,0
+Received the wrong item. I ordered a blue Mechanical Keyboard but received a red one instead.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+I am getting a white screen on the mobile app. I have reinstalled it twice but the problem persists.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.67,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.94,1
+I noticed unauthorized transactions on my bank card from your store. Someone hacked my account.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.99,1
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.7,0
+Please cancel my order ORD-551914 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.52,0
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.59,0
+Received the wrong item. I ordered a blue 4K Monitor but received a red one instead.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.75,0
+Please cancel my order ORD-541557 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.59,0
+I was promised a callback from a supervisor within 24 hours but no one called. Very unprofessional.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.67,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.95,1
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.71,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.94,1
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.33,0
+I received a phishing email that seems to have leaked my account information. Please lock my profile.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.93,1
+The billing amount on my invoice ORD-722665 is incorrect. I was charged $1456 instead of the advertised price of $1109.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.78,1
+My transaction was declined at checkout but my bank statement shows the payment was successfully processed. Please help.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.8,1
+The product quality is extremely poor. The seams are ripped and the fabric is torn.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.73,0
+I would like to request a refund for order ORD-427040 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.55,0
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.63,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.63,0
+The tracking number TRK70340936 is not updating at all. It just says shipment pending.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.63,0
+I opened the package and Samsung Galaxy S24 has multiple scratches and is dented. The packaging was damaged.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.74,0
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.32,0
+I am getting a white screen on the mobile app. I have reinstalled it twice but the problem persists.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.65,0
+Please cancel my order ORD-635638 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.49,0
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.72,0
+I have been charged for a subscription renewal that I cancelled last week. I want my money back.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.83,1
+Your company has the worst customer support. No one replies to emails and phone support is disconnected.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.61,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.71,0
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.66,0
+I have been charged for a subscription renewal that I cancelled last week. I want my money back.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.9,1
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.76,1
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.79,1
+Please cancel my order ORD-390794 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.62,0
+I received a phishing email that seems to have leaked my account information. Please lock my profile.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,1.0,1
+I am writing to demand a refund because the software licence key I bought does not work.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.62,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.55,0
+The API is returning bad gateway errors repeatedly when we try to fetch our account reports.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.61,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.65,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.73,0
+My order ORD-420349 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.65,0
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.75,0
+Security breach alert: my account is compromised and someone is trying to transfer my credits.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.92,1
+I am locked out of my profile and the password reset link is not arriving in my mailbox.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.39,0
+Parts are missing from the package. I cannot assemble the Bluetooth Speaker without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.67,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.96,1
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.31,0
+The product quality is extremely poor. The seams are ripped and the fabric is torn.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.84,1
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.55,0
+The screen of the Mechanical Keyboard I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.67,0
+I paid for express shipping but my package ORD-182860 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.7,0
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.54,0
+The billing amount on my invoice ORD-876636 is incorrect. I was charged $1384 instead of the advertised price of $1357.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.78,1
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.67,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.95,1
+I paid for express shipping but my package ORD-910894 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.55,0
+"I tried to purchase 4K Monitor and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.93,1
+My password was changed without my permission. I received an alert but I did not initiate this.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.95,1
+"I tried to purchase 4K Monitor and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.82,1
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.69,0
+Parts are missing from the package. I cannot assemble the iPhone 15 without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.78,1
+The billing amount on my invoice ORD-494552 is incorrect. I was charged $22 instead of the advertised price of $1356.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.85,1
+"I tried to purchase iPhone 15 and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.77,1
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.5,0
+I cannot log in to my account. It keeps saying invalid credentials but I am using the correct password.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.46,0
+Please cancel my order ORD-571404 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.64,0
+The product quality is extremely poor. The seams are ripped and the fabric is torn.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+"I tried to purchase Wireless Headphones and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.81,1
+My order ORD-682959 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.58,0
+"My payment of $475 for order ORD-307757 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.93,1
+I would like to request a refund for order ORD-777366 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.64,0
+"I tried to purchase 4K Monitor and the transaction failed on checkout. However, my credit card was debited twice.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.78,1
+I opened the package and MacBook Pro has multiple scratches and is dented. The packaging was damaged.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.73,0
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.55,0
+I have been charged for a subscription renewal that I cancelled last week. I want my money back.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.76,1
+The screen of the Bluetooth Speaker I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.67,0
+The item Wireless Headphones arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.69,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.78,1
+I was promised a callback from a supervisor within 24 hours but no one called. Very unprofessional.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.5,0
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.53,0
+My order ORD-176054 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.58,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.71,0
+I suspect my profile has been compromised because there are active login sessions from unknown locations.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.97,1
+Parts are missing from the package. I cannot assemble the MacBook Pro without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.68,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.59,0
+The API is returning bad gateway errors repeatedly when we try to fetch our account reports.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.78,1
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.76,1
+The billing amount on my invoice ORD-373812 is incorrect. I was charged $61 instead of the advertised price of $662.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.9,1
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.46,0
+Your website keeps crashing on checkout when using Chrome. I cannot complete my transaction.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.68,0
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.6,0
+I would like to request a refund for order ORD-769191 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.53,0
+I want to complain about the lack of communication regarding my order delay. Nobody updates me.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.59,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.43,0
+I was charged for shipping even though my order qualified for free shipping. Refund the difference please.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.53,0
+I was promised a callback from a supervisor within 24 hours but no one called. Very unprofessional.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.66,0
+My order ORD-275284 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.75,0
+My password was changed without my permission. I received an alert but I did not initiate this.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.93,1
+The API is returning bad gateway errors repeatedly when we try to fetch our account reports.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.72,0
+I would like to request a refund for order ORD-923914 since the service was not provided.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.58,0
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.64,0
+Duplicate charge on my credit card statement for order ORD-490532. I see two identical charges of $993.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.92,1
+Please cancel my order ORD-879850 and issue a full refund to my original payment method.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.47,0
+I have been waiting on live chat for 2 hours and no agent has connected. This support is useless.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.6,0
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.56,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.61,0
+I am getting a white screen on the mobile app. I have reinstalled it twice but the problem persists.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.75,0
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.59,0
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.46,0
+The item Mechanical Keyboard arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.69,0
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.42,0
+"My profile settings are not saving. Every time I update my email, it reverts back.",ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.44,0
+I am locked out of my profile and the password reset link is not arriving in my mailbox.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.33,0
+Duplicate charge on my credit card statement for order ORD-372028. I see two identical charges of $1038.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.95,1
+The item Bluetooth Speaker arrived in a damaged condition. The power button does not work at all.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.83,1
+I paid for express shipping but my package ORD-234159 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.59,0
+Parts are missing from the package. I cannot assemble the Gaming Mouse without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.82,1
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.58,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.36,0
+My order ORD-761685 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.59,0
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.64,0
+Your company has the worst customer support. No one replies to emails and phone support is disconnected.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.54,0
+Duplicate charge on my credit card statement for order ORD-827213. I see two identical charges of $529.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.87,1
+My order ORD-404955 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.62,0
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.54,0
+My transaction was declined at checkout but my bank statement shows the payment was successfully processed. Please help.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.86,1
+My transaction was declined at checkout but my bank statement shows the payment was successfully processed. Please help.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.77,1
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.4,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.67,0
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.48,0
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.6,0
+Where is my refund for the returned product? It has been over two weeks since you received the item.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.62,0
+I cannot log in to my account. It keeps saying invalid credentials but I am using the correct password.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.43,0
+I paid for express shipping but my package ORD-752011 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.63,0
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.51,0
+My order ORD-606121 has not arrived yet. It was supposed to be delivered 5 days ago.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.72,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.55,0
+Parts are missing from the package. I cannot assemble the Samsung Galaxy S24 without the screws and manual.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.79,1
+My password was changed without my permission. I received an alert but I did not initiate this.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.86,1
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.58,0
+The screen of the Bluetooth Speaker I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.85,1
+"My payment of $846 for order ORD-137572 failed, but the money was deducted from my account. Please refund immediately.",PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.88,1
+The agent closed my ticket without resolving my issue. This is absolutely unacceptable.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.62,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.79,1
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.45,0
+I noticed unauthorized transactions on my bank card from your store. Someone hacked my account.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.89,1
+The login screen is giving a 500 internal server error when I click submit. Please fix this bug.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.63,0
+The support agent I spoke to was extremely rude and unhelpful. I want to make a formal complaint.,SERVICE,OTHER,VERY_NEGATIVE,MEDIUM,SUPPORT_DELAY,0.64,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.7,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.4,0
+The search bar on your store returns no results for any keywords. It seems the database is down.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.8,1
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.69,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.34,0
+I paid for express shipping but my package ORD-253541 is delayed. I want a refund on the delivery fee.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.71,0
+You promised a refund within 3 days but I still haven't received it. This is terrible service.,REFUND,REFUND_REQUEST,NEGATIVE,MEDIUM,REFUND_DELAY,0.53,0
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.74,0
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.64,0
+My delivery is severely late and I need this item for a birthday event tomorrow. Help!,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.58,0
+My account user_711 is locked due to too many login attempts. Please unlock it.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.45,0
+I need to disable my account temporarily because I lost my phone containing the authenticator app.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.46,0
+Where is my package? The courier says delivered but I haven't received anything at my address.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.62,0
+I am locked out of my profile and the password reset link is not arriving in my mailbox.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.42,0
+The screen of the Samsung Galaxy S24 I received is completely shattered and broken. I want a replacement.,PRODUCT,DAMAGED_PRODUCT,VERY_NEGATIVE,HIGH,DAMAGED_IN_TRANSIT,0.65,0
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.79,1
+It has been 10 days since dispatch and the logistics tracking is stuck in transit. Please contact the carrier.,DELIVERY,ORDER_DELAY,NEGATIVE,MEDIUM,LOGISTICS_DELAY,0.59,0
+Security breach alert: my account is compromised and someone is trying to transfer my credits.,SECURITY,SECURITY_ISSUE,VERY_NEGATIVE,CRITICAL,ACCOUNT_COMPROMISED,0.89,1
+I cannot access my dashboard. The website redirects me to login repeatedly in an infinite loop.,ACCOUNT,ACCOUNT_LOCKED,NEUTRAL,MEDIUM,CREDENTIALS_ISSUE,0.38,0
+The login screen is giving a 500 internal server error when I click submit. Please fix this bug.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.77,1
+Your checkout page is unresponsive. The loading spinner just spins forever without finishing.,TECHNICAL,TECHNICAL_FAILURE,NEGATIVE,HIGH,TECHNICAL_FAILURE,0.68,0
+I have been charged for a subscription renewal that I cancelled last week. I want my money back.,PAYMENT,PAYMENT_FAILED,VERY_NEGATIVE,HIGH,PAYMENT_GATEWAY_FAILURE,0.89,1
