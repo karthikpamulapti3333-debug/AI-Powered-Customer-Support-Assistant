@@ -15,10 +15,11 @@ export default function CustomerDashboard() {
     setError('');
     try {
       const data = await complaintService.getComplaints();
-      setComplaints(data);
+      setComplaints(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
       setError('Failed to fetch your complaints. Please reload.');
+      setComplaints([]);
     } finally {
       setLoading(false);
     }
@@ -28,9 +29,10 @@ export default function CustomerDashboard() {
     loadComplaints();
   }, []);
 
-  const total = complaints.size || complaints.length;
-  const open = complaints.filter(c => !['RESOLVED', 'CLOSED'].includes(c.status)).length;
-  const resolved = complaints.filter(c => ['RESOLVED', 'CLOSED'].includes(c.status)).length;
+  const safeComplaints = Array.isArray(complaints) ? complaints : [];
+  const total = safeComplaints.length;
+  const open = safeComplaints.filter(c => !['RESOLVED', 'CLOSED'].includes(c.status)).length;
+  const resolved = safeComplaints.filter(c => ['RESOLVED', 'CLOSED'].includes(c.status)).length;
 
   const showQueueOnly = location.pathname === '/customer/complaints';
 
@@ -129,7 +131,7 @@ export default function CustomerDashboard() {
             <span className="w-8 h-8 border-3 border-sky-500/20 border-t-sky-400 rounded-full animate-spin" />
             <span className="text-xs font-semibold">Retrieving tickets...</span>
           </div>
-        ) : complaints.length === 0 ? (
+        ) : safeComplaints.length === 0 ? (
           <div className="p-20 text-center flex flex-col items-center justify-center gap-4">
             <MessageSquare size={36} className="text-slate-600" />
             <div>
@@ -157,7 +159,7 @@ export default function CustomerDashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60">
-                {complaints.map((c) => (
+                {safeComplaints.map((c) => (
                   <tr 
                     key={c.id} 
                     onClick={() => navigate(`/customer/complaints/${c.id}`)}

@@ -25,10 +25,11 @@ export default function AgentDashboard() {
     setError('');
     try {
       const data = await complaintService.getComplaints();
-      setComplaints(data);
+      setComplaints(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
       setError('Failed to fetch assigned complaints.');
+      setComplaints([]);
     } finally {
       setLoading(false);
     }
@@ -38,12 +39,13 @@ export default function AgentDashboard() {
     loadAgentTickets();
   }, []);
 
-  const total = complaints.length;
-  const assigned = complaints.filter(c => c.status === 'ASSIGNED').length;
-  const inProgress = complaints.filter(c => c.status === 'IN_PROGRESS').length;
-  const resolved = complaints.filter(c => ['RESOLVED', 'CLOSED'].includes(c.status)).length;
-  const escalated = complaints.filter(c => c.status === 'ESCALATED').length;
-  const highRisk = complaints.filter(c => c.escalationStatus === 'HIGH_RISK').length;
+  const safeComplaints = Array.isArray(complaints) ? complaints : [];
+  const total = safeComplaints.length;
+  const assigned = safeComplaints.filter(c => c.status === 'ASSIGNED').length;
+  const inProgress = safeComplaints.filter(c => c.status === 'IN_PROGRESS').length;
+  const resolved = safeComplaints.filter(c => ['RESOLVED', 'CLOSED'].includes(c.status)).length;
+  const escalated = safeComplaints.filter(c => c.status === 'ESCALATED').length;
+  const highRisk = safeComplaints.filter(c => c.escalationStatus === 'HIGH_RISK').length;
 
   const showQueueOnly = location.pathname === '/agent/complaints';
 
@@ -159,7 +161,7 @@ export default function AgentDashboard() {
             <span className="w-8 h-8 border-3 border-sky-500/20 border-t-sky-400 rounded-full animate-spin" />
             <span className="text-xs font-semibold">Triage loading...</span>
           </div>
-        ) : complaints.length === 0 ? (
+        ) : safeComplaints.length === 0 ? (
           <div className="p-20 text-center flex flex-col items-center justify-center gap-4 text-slate-500">
             <Inbox size={42} className="text-slate-700" />
             <div>
@@ -182,7 +184,7 @@ export default function AgentDashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60">
-                {complaints.map((c) => (
+                {safeComplaints.map((c) => (
                   <tr 
                     key={c.id} 
                     onClick={() => navigate(`/agent/complaints/${c.id}`)}
