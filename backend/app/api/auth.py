@@ -103,8 +103,15 @@ def register(req: RegisterRequest, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=LoginResponse)
 def login(req: LoginRequest, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.username == req.username).first()
-    if not user or not verify_password(req.password, user.password):
+    from sqlalchemy import func
+    u_clean = req.username.strip().lower() if req.username else ""
+    p_clean = req.password.strip() if req.password else ""
+
+    user = db.query(User).filter(func.lower(User.username) == u_clean).first()
+    if not user:
+        user = db.query(User).filter(func.lower(User.email) == u_clean).first()
+
+    if not user or not verify_password(p_clean, user.password):
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
     roles = [r.name for r in user.roles]
