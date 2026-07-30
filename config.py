@@ -13,9 +13,13 @@ class Config:
     JWT_HEADER_NAME = "Authorization"
     JWT_HEADER_TYPE = "Bearer"
 
-    # Database setup: SQLite fallback if DATABASE_URL is unset
-    db_url = os.environ.get("DATABASE_URL", "sqlite:///instance/resolveai.db")
-    if db_url and db_url.startswith("postgres://"):
+    # Database setup: Absolute SQLite fallback if DATABASE_URL is unset
+    db_url = os.environ.get("DATABASE_URL", "")
+    if not db_url or "sqlite" in db_url:
+        db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "instance", "resolveai.db")
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+        db_url = f"sqlite:///{db_path}"
+    elif db_url.startswith("postgres://"):
         db_url = db_url.replace("postgres://", "postgresql://", 1)
     SQLALCHEMY_DATABASE_URI = db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
