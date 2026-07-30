@@ -43,15 +43,32 @@ app.include_router(admin_router)
 app.include_router(kb_router)
 app.include_router(gaps_router)
 
-# Health endpoints
-@app.get("/")
-def read_root():
-    return {"status": "AI service and Backend are running", "project": settings.PROJECT_NAME}
+import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
+# Health endpoints
 @app.get("/health")
 @app.get("/api/health")
 def read_health():
     return {"status": "UP", "message": "ResolveAI Backend is running"}
+
+# Serve Frontend static files if available
+frontend_dist = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../frontend/dist"))
+assets_dir = os.path.join(frontend_dist, "assets")
+
+if os.path.exists(assets_dir):
+    app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+@app.get("/")
+@app.get("/{catchall:path}")
+def serve_frontend_or_status(catchall: str = ""):
+    if catchall and catchall.startswith("api"):
+        return {"detail": "Not Found"}
+    index_file = os.path.join(frontend_dist, "index.html")
+    if os.path.exists(index_file):
+        return FileResponse(index_file)
+    return {"status": "AI service and Backend are running", "project": settings.PROJECT_NAME}
 
 # Seeding database function
 def seed_database(db: Session):
