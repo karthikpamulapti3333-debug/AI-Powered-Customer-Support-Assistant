@@ -1,22 +1,20 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, make_response, Response
-from flask_jwt_extended import create_access_token, unset_jwt_cookies, set_access_cookies
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, Response
+from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy import func
-from app.models.user import User
+from app.models.admin import Admin
 from app.models.ticket import Ticket
 from app.models.chat import ChatSession, Message
 from app.models.knowledge import KnowledgeBase
 from app.extensions import db
-from app.middleware.auth_middleware import get_current_user_from_jwt, admin_required
-from app.utils.exporter import export_tickets_csv
+from app.services.exporter import export_tickets_csv
 
 admin_bp = Blueprint('admin', __name__)
 
-@admin_bp.context_processor
-def inject_user():
-    return dict(current_user=get_current_user_from_jwt())
-
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('admin.dashboard'))
+
     if request.method == 'POST':
         if request.is_json:
             data = request.get_json()
@@ -34,38 +32,34 @@ def login():
             return render_template('admin/login.html')
 
         login_clean = login_id.lower().strip()
-        user = User.query.filter((User.email == login_clean) | (User.username == login_clean)).first()
+        admin = Admin.query.filter((Admin.email == login_clean) | (Admin.username == login_clean)).first()
 
-        if not user or user.role != 'ADMIN' or not user.check_password(password):
-            msg = "Invalid Admin credentials or access denied."
+        if not admin or not admin.check_password(password):
+            msg = "Invalid Admin credentials."
             if request.is_json:
                 return jsonify({"error": msg}), 401
             flash(msg, "danger")
             return render_template('admin/login.html')
 
-        token = create_access_token(identity=str(user.id), additional_claims={"email": user.email, "role": user.role})
+        login_user(admin, remember=True)
 
         if request.is_json:
-            res = make_response(jsonify({"message": "Admin login successful", "token": token, "user": user.to_dict()}))
-            set_access_cookies(res, token)
-            return res, 200
+            return jsonify({"message": "Admin login successful", "admin": admin.to_dict()}), 200
 
-        res = make_response(redirect(url_for('admin.dashboard')))
-        set_access_cookies(res, token)
-        flash("Welcome to Admin Management Console!", "success")
-        return res
+        flash("Welcome to Admin Console!", "success")
+        return redirect(url_for('admin.dashboard'))
 
     return render_template('admin/login.html')
 
 @admin_bp.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
-    res = make_response(redirect(url_for('admin.login')))
-    unset_jwt_cookies(res)
-    flash("Admin logged out successfully.", "info")
-    return res
+    logout_user()
+    flash("Logged out successfully.", "info")
+    return redirect(url_for('admin.login'))
 
 @admin_bp.route('/dashboard')
-@admin_required()
+@login_required
 def dashboard():
     total_tickets = Ticket.query.count()
     open_tickets = Ticket.query.filter(Ticket.status.in_(['OPEN', 'PENDING', 'IN_PROGRESS'])).count()
@@ -88,7 +82,7 @@ def dashboard():
     )
 
 @admin_bp.route('/analytics')
-@admin_required()
+@login_required
 def analytics():
     status_counts = db.session.query(Ticket.status, func.count(Ticket.id)).group_by(Ticket.status).all()
     status_data = {status: count for status, count in status_counts}
@@ -109,15 +103,15 @@ def analytics():
     return render_template('admin/analytics.html', status_data=status_data, category_data=category_data, chat_data=chat_data)
 
 @admin_bp.route('/users')
-@admin_required()
+@login_required
 def list_users():
-    users = User.query.filter_by(role='ADMIN').all()
+    admins = Admin.query.all()
     if request.is_json or request.args.get('format') == 'json':
-        return jsonify([u.to_dict() for u in users]), 200
-    return render_template('admin/users.html', users=users)
+        return jsonify([a.to_dict() for a in admins]), 200
+    return render_template('admin/users.html', users=admins)
 
 @admin_bp.route('/export/tickets')
-@admin_required()
+@login_required
 def export_tickets():
     csv_data = export_tickets_csv()
     return Response(

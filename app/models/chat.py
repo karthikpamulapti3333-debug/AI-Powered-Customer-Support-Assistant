@@ -6,8 +6,8 @@ class ChatSession(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     session_id = db.Column(db.String(64), unique=True, nullable=False, index=True)
-    title = db.Column(db.String(255), nullable=True, default='Guest Support Conversation')
-    status = db.Column(db.String(20), default='ACTIVE') # ACTIVE, CLOSED
+    title = db.Column(db.String(255), nullable=True, default='Guest Conversation')
+    status = db.Column(db.String(20), default='ACTIVE')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

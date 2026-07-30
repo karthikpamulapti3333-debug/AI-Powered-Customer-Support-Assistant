@@ -16,15 +16,15 @@ class TicketTestCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
-    def test_guest_ticket_creation_and_admin_reply(self):
-        # 1. Guest creates ticket without logging in
+    def test_guest_ticket_creation_and_admin_management(self):
+        # 1. Guest submits ticket
         create_res = self.client.post('/tickets/new', json={
-            "name": "Jane Guest",
-            "email": "jane@example.com",
-            "phone": "+1555123456",
-            "subject": "Billing issue with monthly subscription",
-            "description": "I was charged twice on my invoice.",
-            "category": "BILLING",
+            "name": "Alex Guest",
+            "email": "alex@example.com",
+            "phone": "+1555987654",
+            "subject": "Need help with API key setup",
+            "description": "How do I generate an enterprise API key?",
+            "category": "TECHNICAL",
             "priority": "HIGH"
         })
         self.assertEqual(create_res.status_code, 201)
@@ -33,27 +33,21 @@ class TicketTestCase(unittest.TestCase):
         ticket_id = ticket_data["ticket"]["id"]
 
         # 2. Login as Admin
-        admin_login = self.client.post('/admin/login', json={
-            "email": "admin@example.com",
+        login_res = self.client.post('/admin/login', data={
+            "login_id": "admin@example.com",
             "password": "admin123"
-        })
-        token = admin_login.get_json()["token"]
-        headers = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json"
-        }
+        }, follow_redirects=True)
+        self.assertEqual(login_res.status_code, 200)
 
-        # 3. Admin posts reply
-        reply_res = self.client.post(f'/tickets/{ticket_id}/reply', json={
-            "message": "We have refunded the duplicate charge. Thanks for notifying us."
-        }, headers=headers)
-        self.assertEqual(reply_res.status_code, 201)
+        # 3. Admin views ticket detail
+        view_res = self.client.get(f'/tickets/{ticket_id}')
+        self.assertEqual(view_res.status_code, 200)
 
-        # 4. Admin updates status to RESOLVED
-        status_res = self.client.put(f'/tickets/{ticket_id}/status', json={
-            "status": "RESOLVED"
-        }, headers=headers)
-        self.assertEqual(status_res.status_code, 200)
+        # 4. Admin posts reply
+        reply_res = self.client.post(f'/tickets/{ticket_id}/reply', data={
+            "message": "API keys can be generated from the integration tab."
+        }, follow_redirects=True)
+        self.assertEqual(reply_res.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,13 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import login_required, current_user
 from app.models.knowledge import KnowledgeBase
 from app.extensions import db
-from app.middleware.auth_middleware import get_current_user_from_jwt, admin_required
 
 kb_bp = Blueprint('kb', __name__)
-
-@kb_bp.context_processor
-def inject_user():
-    return dict(current_user=get_current_user_from_jwt())
 
 @kb_bp.route('/', methods=['GET'])
 def list_faqs():
@@ -17,7 +13,7 @@ def list_faqs():
     return render_template('admin/kb.html', faqs=faqs)
 
 @kb_bp.route('/create', methods=['POST'])
-@admin_required()
+@login_required
 def create_faq():
     if request.is_json:
         data = request.get_json()
@@ -52,7 +48,7 @@ def create_faq():
     return redirect(url_for('kb.list_faqs'))
 
 @kb_bp.route('/<int:faq_id>/delete', methods=['POST', 'DELETE'])
-@admin_required()
+@login_required
 def delete_faq(faq_id):
     faq = KnowledgeBase.query.get_or_404(faq_id)
     db.session.delete(faq)

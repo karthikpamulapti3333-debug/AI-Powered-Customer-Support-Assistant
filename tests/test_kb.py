@@ -22,19 +22,18 @@ class KnowledgeBaseTestCase(unittest.TestCase):
         self.assertEqual(list_res.status_code, 200)
         self.assertGreaterEqual(len(list_res.get_json()), 1)
 
-        # 2. Login Admin
-        admin_login = self.client.post('/admin/login', json={
-            "email": "admin@example.com",
+        # 2. Login Admin via Flask-Login
+        self.client.post('/admin/login', data={
+            "login_id": "admin@example.com",
             "password": "admin123"
         })
-        token = admin_login.get_json()["token"]
 
         # 3. Admin Create FAQ
         create_res = self.client.post('/kb/create', json={
             "question": "How do I upgrade my plan?",
             "answer": "Go to billing settings and click upgrade.",
             "category": "ACCOUNT"
-        }, headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
+        })
         self.assertEqual(create_res.status_code, 201)
 
 if __name__ == '__main__':

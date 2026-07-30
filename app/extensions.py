@@ -1,16 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
+from flask_login import LoginManager
 from flask_cors import CORS
 
 db = SQLAlchemy()
-jwt = JWTManager()
+login_manager = LoginManager()
 cors = CORS()
 
-try:
-    from flask_migrate import Migrate
-    migrate = Migrate()
-except ImportError:
-    class DummyMigrate:
-        def init_app(self, app, db):
-            pass
-    migrate = DummyMigrate()
+login_manager.login_view = 'admin.login'
+login_manager.login_message_category = 'warning'
+login_manager.login_message = 'Please log in as an administrator to access this page.'

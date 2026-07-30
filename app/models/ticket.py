@@ -13,8 +13,8 @@ class Ticket(db.Model):
     subject = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(50), nullable=False, default='GENERAL')
-    priority = db.Column(db.String(20), nullable=False, default='MEDIUM') # LOW, MEDIUM, HIGH, CRITICAL
-    status = db.Column(db.String(20), nullable=False, default='OPEN') # OPEN, PENDING, RESOLVED, CLOSED
+    priority = db.Column(db.String(20), nullable=False, default='MEDIUM')
+    status = db.Column(db.String(20), nullable=False, default='OPEN')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -46,19 +46,19 @@ class TicketReply(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     ticket_id = db.Column(db.Integer, db.ForeignKey('tickets.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True) # Admin ID if staff reply
+    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'), nullable=True)
     message = db.Column(db.Text, nullable=False)
     is_internal = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    user = db.relationship('User', backref='ticket_replies', lazy=True)
+    admin = db.relationship('Admin', backref='ticket_replies', lazy=True)
 
     def to_dict(self):
         return {
             "id": self.id,
             "ticketId": self.ticket_id,
-            "userId": self.user_id,
-            "userName": self.user.full_name if self.user else "Support Agent",
+            "adminId": self.admin_id,
+            "adminName": self.admin.full_name if self.admin else "System Admin",
             "message": self.message,
             "isInternal": self.is_internal,
             "createdAt": self.created_at.isoformat() if self.created_at else None

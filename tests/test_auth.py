@@ -17,21 +17,26 @@ class AuthTestCase(unittest.TestCase):
         self.app_context.pop()
 
     def test_admin_login_success(self):
-        res = self.client.post('/admin/login', json={
-            "email": "admin@example.com",
+        res = self.client.post('/admin/login', data={
+            "login_id": "admin@example.com",
             "password": "admin123"
-        })
+        }, follow_redirects=True)
         self.assertEqual(res.status_code, 200)
-        data = res.get_json()
-        self.assertIn("token", data)
-        self.assertEqual(data["user"]["role"], "ADMIN")
+
+        # Check protected dashboard access after session login
+        dash_res = self.client.get('/admin/dashboard')
+        self.assertEqual(dash_res.status_code, 200)
 
     def test_admin_login_invalid_password(self):
-        res = self.client.post('/admin/login', json={
-            "email": "admin@example.com",
+        res = self.client.post('/admin/login', data={
+            "login_id": "admin@example.com",
             "password": "wrongpassword"
         })
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 200) # Re-renders login form with flash
+
+    def test_unauthorized_dashboard_redirect(self):
+        res = self.client.get('/admin/dashboard')
+        self.assertEqual(res.status_code, 302) # Redirects to /admin/login
 
 if __name__ == '__main__':
     unittest.main()

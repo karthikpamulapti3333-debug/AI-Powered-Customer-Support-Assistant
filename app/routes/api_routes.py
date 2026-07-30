@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
+from flask_login import login_required, current_user
 from app.models.ticket import Ticket
 from app.models.chat import ChatSession, Message
 from app.models.knowledge import KnowledgeBase
 from app.extensions import db
-from app.middleware.auth_middleware import admin_required, get_current_user_from_jwt
 
 api_bp = Blueprint('api', __name__)
 
@@ -23,18 +23,14 @@ def api_tickets():
         from app.routes.ticket_routes import create_ticket
         return create_ticket()
     else:
-        user = get_current_user_from_jwt()
-        if not user or user.role != 'ADMIN':
+        if not current_user.is_authenticated:
             return jsonify({"error": "Admin authentication required"}), 401
         tickets = Ticket.query.order_by(Ticket.created_at.desc()).all()
         return jsonify([t.to_dict() for t in tickets]), 200
 
 @api_bp.route('/tickets/<int:ticket_id>', methods=['GET', 'PUT', 'DELETE'])
+@login_required
 def api_ticket_detail(ticket_id):
-    user = get_current_user_from_jwt()
-    if not user or user.role != 'ADMIN':
-        return jsonify({"error": "Admin authentication required"}), 401
-
     ticket = Ticket.query.get_or_404(ticket_id)
     if request.method == 'GET':
         return jsonify(ticket.to_dict()), 200
@@ -60,7 +56,7 @@ def api_kb():
     return jsonify([f.to_dict() for f in faqs]), 200
 
 @api_bp.route('/admin/dashboard', methods=['GET'])
-@admin_required()
+@login_required
 def api_admin_dashboard():
     return jsonify({
         "totalTickets": Ticket.query.count(),

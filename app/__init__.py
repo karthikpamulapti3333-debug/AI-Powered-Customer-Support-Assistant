@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template
 from config import config_by_name
-from app.extensions import db, jwt, migrate, cors
+from app.extensions import db, login_manager, cors
 
 def create_app(config_name=None):
     if config_name is None:
@@ -15,17 +15,14 @@ def create_app(config_name=None):
 
     # Initialize extensions
     db.init_app(app)
-    jwt.init_app(app)
-    migrate.init_app(app, db)
+    login_manager.init_app(app)
     cors.init_app(app)
 
-    # JWT Admin Identity Loader
-    from app.models.user import User
-    @jwt.user_lookup_loader
-    def user_lookup_callback(_jwt_header, jwt_data):
-        identity = jwt_data["sub"]
-        user_id = identity.get("id") if isinstance(identity, dict) else identity
-        return db.session.get(User, int(user_id))
+    # Flask-Login Admin User Loader
+    from app.models.admin import Admin
+    @login_manager.user_loader
+    def load_user(admin_id):
+        return db.session.get(Admin, int(admin_id))
 
     # Register Blueprints
     from app.routes.main_routes import main_bp
@@ -45,7 +42,7 @@ def create_app(config_name=None):
     # Register Error Handlers
     register_error_handlers(app)
 
-    # Shell context & DB auto-seeding
+    # Auto-create all database tables and seed default Admin account
     with app.app_context():
         db.create_all()
         seed_database()
@@ -70,13 +67,13 @@ def register_error_handlers(app):
         return render_template('errors/500.html'), 500
 
 def seed_database():
-    from app.models.user import User
+    from app.models.admin import Admin
     from app.models.knowledge import KnowledgeBase
 
-    # Seed Admin User (Only Admin user exists)
-    admin = User.query.filter_by(email="admin@example.com").first()
+    # Auto-seed default Admin account
+    admin = Admin.query.filter_by(email="admin@example.com").first()
     if not admin:
-        admin = User(
+        admin = Admin(
             email="admin@example.com",
             username="admin",
             first_name="System",
@@ -86,22 +83,22 @@ def seed_database():
         admin.set_password("admin123")
         db.session.add(admin)
 
-    # Seed Knowledge Base FAQs
+    # Auto-seed Knowledge Base FAQs
     if KnowledgeBase.query.count() == 0:
         faqs = [
             KnowledgeBase(
                 question="How do I request a billing refund?",
-                answer="Refund requests are processed within 3-5 business days. If you experience discrepancies, click 'Create Support Ticket' to submit a billing inquiry.",
+                answer="Refund requests are processed within 3-5 business days. Submit a support ticket from the homepage if you experience billing discrepancies.",
                 category="BILLING"
             ),
             KnowledgeBase(
                 question="What payment options do you support?",
-                answer="We support all major credit cards (Visa, MasterCard, Amex), PayPal, and direct ACH bank transfers for Enterprise subscriptions.",
+                answer="We support Visa, MasterCard, Amex, PayPal, and direct ACH bank transfers for Enterprise subscriptions.",
                 category="BILLING"
             ),
             KnowledgeBase(
-                question="How do I open a support ticket?",
-                answer="You can open a support ticket directly from the instant AI Chat interface when prompted, or by clicking the 'Support Ticket' button on the homepage.",
+                question="How do I submit a support ticket?",
+                answer="Click 'Submit Support Ticket' on the homepage or interact with our AI Assistant to trigger a ticket submission modal.",
                 category="SUPPORT"
             )
         ]

@@ -1,15 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import login_required, current_user
 from app.models.ticket import Ticket, TicketReply
-from app.models.user import User
-from app.models.notification import Notification
+from app.models.admin import Admin
 from app.extensions import db
-from app.middleware.auth_middleware import get_current_user_from_jwt, admin_required
 
 ticket_bp = Blueprint('tickets', __name__)
-
-@ticket_bp.context_processor
-def inject_user():
-    return dict(current_user=get_current_user_from_jwt())
 
 @ticket_bp.route('/new', methods=['POST'])
 def create_ticket():
@@ -51,17 +46,6 @@ def create_ticket():
         status='OPEN'
     )
     db.session.add(ticket)
-
-    # Create Admin notification
-    admin_user = User.query.filter_by(role='ADMIN').first()
-    if admin_user:
-        notif = Notification(
-            user_id=admin_user.id,
-            title=f"New Ticket {ticket.ticket_code}",
-            message=f"Guest {name} submitted ticket: {subject}"
-        )
-        db.session.add(notif)
-
     db.session.commit()
 
     if request.is_json:
@@ -75,7 +59,7 @@ def create_ticket():
     return redirect(url_for('main.home'))
 
 @ticket_bp.route('/', methods=['GET'])
-@admin_required()
+@login_required
 def list_tickets():
     status_filter = request.args.get('status')
     query = Ticket.query
@@ -85,7 +69,7 @@ def list_tickets():
     return render_template('admin/tickets.html', tickets=tickets)
 
 @ticket_bp.route('/<int:ticket_id>', methods=['GET'])
-@admin_required()
+@login_required
 def view_ticket(ticket_id):
     ticket = Ticket.query.get_or_404(ticket_id)
     if request.is_json or request.headers.get('Accept') == 'application/json':
@@ -93,10 +77,9 @@ def view_ticket(ticket_id):
     return render_template('admin/ticket_detail.html', ticket=ticket)
 
 @ticket_bp.route('/<int:ticket_id>/reply', methods=['POST'])
-@admin_required()
+@login_required
 def reply_ticket(ticket_id):
     ticket = Ticket.query.get_or_404(ticket_id)
-    admin = get_current_user_from_jwt()
 
     if request.is_json:
         data = request.get_json()
@@ -112,7 +95,7 @@ def reply_ticket(ticket_id):
 
     reply = TicketReply(
         ticket_id=ticket.id,
-        user_id=admin.id if admin else None,
+        admin_id=current_user.id if current_user.is_authenticated else None,
         message=message
     )
     db.session.add(reply)
@@ -129,7 +112,7 @@ def reply_ticket(ticket_id):
     return redirect(url_for('tickets.view_ticket', ticket_id=ticket.id))
 
 @ticket_bp.route('/<int:ticket_id>/status', methods=['PUT', 'POST'])
-@admin_required()
+@login_required
 def update_status(ticket_id):
     ticket = Ticket.query.get_or_404(ticket_id)
     if request.is_json:
@@ -148,7 +131,7 @@ def update_status(ticket_id):
     return redirect(url_for('tickets.view_ticket', ticket_id=ticket.id))
 
 @ticket_bp.route('/<int:ticket_id>/delete', methods=['POST', 'DELETE'])
-@admin_required()
+@login_required
 def delete_ticket(ticket_id):
     ticket = Ticket.query.get_or_404(ticket_id)
     db.session.delete(ticket)
