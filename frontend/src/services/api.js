@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-let rawApiUrl = import.meta.env.VITE_API_URL || '/api';
+let rawApiUrl = import.meta.env.VITE_API_URL;
+if (!rawApiUrl || rawApiUrl === '/api') {
+  if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
+    rawApiUrl = 'https://resolveai-backend-6cto.onrender.com/api';
+  } else {
+    rawApiUrl = '/api';
+  }
+}
 if (typeof rawApiUrl === 'string') {
   rawApiUrl = rawApiUrl.trim().replace(/\/+$/, '');
   if (rawApiUrl.startsWith('http') && !rawApiUrl.endsWith('/api')) {
