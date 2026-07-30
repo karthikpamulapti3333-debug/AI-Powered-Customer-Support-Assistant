@@ -153,7 +153,7 @@ def send_message(id: int, req: MessageSendRequest, user: User = Depends(get_curr
         chat_history.append({"role": role, "text": m.message_text})
 
     # 5. Generate AI response
-    ai_reply = llm_gateway.generate_chat_response(text, chat_history, chunks)
+    ai_reply = llm_gateway.generate_chat_response(text, chat_history, chunks, user=user, db=db)
 
     # 6. Save AI message
     sources_str = ",".join(ai_reply["sources"]) if ai_reply["sources"] else ""

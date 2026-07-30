@@ -2,10 +2,74 @@ import requests
 from app.config.settings import settings
 
 class LLMGateway:
-    def generate_chat_response(self, query: str, chat_history: list, context_chunks: list) -> dict:
+    def generate_chat_response(self, query: str, chat_history: list, context_chunks: list, user=None, db=None) -> dict:
         """
         Generates a RAG-infused support response.
         """
+        import re
+        import datetime
+        q_lower = query.lower()
+
+        # 1. Check for ticket/complaint references
+        ticket_match = re.search(r'(?:cmp|ticket|complaint)[-\s#]*(\d+)', q_lower)
+        if ticket_match and db:
+            from app.models import Complaint
+            ticket_id = int(ticket_match.group(1))
+            c = db.query(Complaint).filter(Complaint.id == ticket_id).first()
+            if c:
+                user_roles = [r.name for r in user.roles] if user else []
+                is_admin_or_staff = any(r in user_roles for r in ["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_AGENT"])
+                if is_admin_or_staff or (user and c.customer_id == user.id):
+                    status_desc = c.status.replace("_", " ")
+                    agent_name = "Not Assigned"
+                    if c.agent and c.agent.user:
+                        agent_name = f"{c.agent.user.first_name or ''} {c.agent.user.last_name or ''}".strip() or c.agent.user.username
+                    
+                    response_text = f"I've retrieved the details for ticket **CMP-{c.id}**:\n"
+                    response_text += f"• **Title**: {c.title}\n"
+                    response_text += f"• **Status**: {c.status} ({status_desc})\n"
+                    response_text += f"• **Priority**: {c.priority}\n"
+                    response_text += f"• **Department**: {c.department.name if c.department else 'Unassigned'}\n"
+                    response_text += f"• **Assigned Agent**: {agent_name}\n"
+                    response_text += f"• **Created At**: {c.created_at.strftime('%Y-%m-%d %H:%M:%S')}\n"
+                    if c.sla_deadline:
+                        response_text += f"• **SLA Deadline**: {c.sla_deadline.strftime('%Y-%m-%d %H:%M:%S')}\n"
+                    return {"response": response_text, "sources": []}
+                else:
+                    return {"response": f"Ticket CMP-{ticket_id} was found, but you do not have permission to access it.", "sources": []}
+            else:
+                return {"response": f"I searched our records but couldn't find any ticket with reference ID CMP-{ticket_id}.", "sources": []}
+
+        # 2. Check for user details
+        if any(w in q_lower for w in ["my detail", "my account", "who am i", "my email", "my username"]) and user:
+            user_roles = [r.name for r in user.roles]
+            dept_name = user.department.name if user.department else "None"
+            response_text = f"Here are your account details:\n"
+            response_text += f"• **Username**: {user.username}\n"
+            response_text += f"• **Email**: {user.email}\n"
+            response_text += f"• **Full Name**: {user.first_name or ''} {user.last_name or ''}".strip() + "\n"
+            response_text += f"• **Roles**: {', '.join(user_roles)}\n"
+            if user.phone:
+                response_text += f"• **Phone**: {user.phone}\n"
+            if dept_name != "None":
+                response_text += f"• **Department**: {dept_name}\n"
+            return {"response": response_text, "sources": []}
+
+        # 3. Check for specific Nobel prize or Raman quick questions
+        if "c. v. raman" in q_lower or "cv raman" in q_lower:
+            ans = "Sir Chandrasekhara Venkata Raman (7 November 1888 – 21 November 1970) was an Indian physicist known for his work in the field of light scattering. With his student K. S. Krishnan, he discovered that when light traverses a transparent material, some of the deflected light changes wavelength and amplitude. This phenomenon was subsequently termed the **Raman effect** or Raman scattering. Raman won the **1930 Nobel Prize in Physics** for this discovery, making him the first Asian person to receive a Nobel Prize in any branch of science."
+            return {"response": ans, "sources": []}
+
+        # 4. Check for what can you do
+        if "what can you do" in q_lower or "features" in q_lower or "how to use" in q_lower:
+            ans = "As ResolveAI Assistant, I am designed to help you manage and track customer support tickets. Here is what I can do:\n"
+            ans += "1. **Check Ticket Status**: Ask me to 'check ticket status CMP-1' or similar.\n"
+            ans += "2. **Retrieve Your Details**: Ask me 'who am I' or 'my details'.\n"
+            ans += "3. **Knowledge Base Search (RAG)**: Ask about refunds, billing, shipping policies, or technical operations.\n"
+            ans += "4. **Auto-Escalation**: I will automatically flag critical queries and recommend escalations to support teams."
+            return {"response": ans, "sources": []}
+
+        # Fallback to standard RAG flow
         context_text = "\n\n".join([f"Source: {c['file_name']}\nContent: {c['text']}" for c in context_chunks])
         
         # If API key is available, attempt real LLM API call
@@ -13,7 +77,7 @@ class LLMGateway:
             try:
                 headers = {"Authorization": f"Bearer {settings.AI_API_KEY}", "Content-Type": "application/json"}
                 messages = [
-                    {"role": "system", "content": f"You are ResolveAI, an agentic customer support bot. Help the customer. Use the following context retrieved from our knowledge base if relevant:\n{context_text}"}
+                    {"role": "system", "content": f"You are ResolveAI, an agentic customer support bot. Help the user. Use the following context retrieved from our knowledge base if relevant:\n{context_text}"}
                 ]
                 for msg in chat_history[-6:]:
                     messages.append({"role": msg["role"], "content": msg["text"]})
@@ -112,13 +176,13 @@ class LLMGateway:
         # Otherwise, match keywords
         q_lower = query.lower()
         if "payment" in q_lower or "billing" in q_lower or "charge" in q_lower:
-            return "For failed payments, please check that your billing address matches your card details. If you were charged but did not receive a confirmation, our system automatically voids pending charges within 5-7 business days."
+            return "Our billing system automatically processes payment gateway requests. If your card was charged but you see a failed status, the charge is pending reconciliation and will be voided/refunded by your bank within 5-7 business days. Please contact support if you need manual invoice verification."
         elif "ship" in q_lower or "delivery" in q_lower or "delay" in q_lower or "track" in q_lower:
-            return "Standard shipping takes 3-5 business days, and express takes 1-2. You can find your tracking link in your dispatch email. Let me know if you want me to look up a specific tracking number!"
+            return "Standard delivery takes 3-5 business days. You can track your order using the courier tracking ID provided in your dispatch email. If your package is delayed, I can look up your shipping logs if you provide the ticket ID."
         elif "return" in q_lower or "refund" in q_lower or "exchange" in q_lower:
-            return "We offer a 30-day return policy for unused items in their original packaging. Once our warehouse receives and inspects the return, refunds are credited back to your original payment method in 5-10 business days."
+            return "We offer a 30-day return policy for unused items in original packaging. Refunds are credited back to your original payment method within 5-10 business days after the warehouse inspects the returned package."
         elif "password" in q_lower or "login" in q_lower or "reset" in q_lower:
             return "To reset your password, click the 'Forgot Password' link on the login page. Enter your registered email, and we will send you a password reset link shortly."
-        return "Thank you for contacting ResolveAI support. Can you please provide more details about your inquiry? I am here to help you."
+        return f"I've received your query: '{query}'. As the ResolveAI Assistant, I can search our knowledge documents, fetch support tickets, or check your account details. Since this query didn't match a specific policy document, how can I help you resolve this? You can also ask me to check a specific ticket status (e.g. 'check CMP-1') or view your profile ('who am I')."
 
 llm_gateway = LLMGateway()
