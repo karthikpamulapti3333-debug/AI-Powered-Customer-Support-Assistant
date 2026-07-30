@@ -71,8 +71,8 @@ def register(req: RegisterRequest, db: Session = Depends(get_db)):
         username=req.username,
         password=hash_password(req.password),
         email=req.email,
-        firstName=req.firstName,
-        lastName=req.lastName,
+        first_name=req.firstName,
+        last_name=req.lastName,
         phone=req.phone,
         department_id=req.departmentId
     )
@@ -115,8 +115,8 @@ def get_me(user: User = Depends(get_current_user)):
         "id": user.id,
         "username": user.username,
         "email": user.email,
-        "firstName": user.firstName,
-        "lastName": user.lastName,
+        "firstName": user.first_name,
+        "lastName": user.last_name,
         "phone": user.phone,
         "department": {
             "id": user.department.id,
@@ -133,9 +133,9 @@ def update_profile(req: UserProfileUpdateRequest, user: User = Depends(get_curre
             raise HTTPException(status_code=400, detail="Email is already in use")
         user.email = req.email
     if req.firstName is not None:
-        user.firstName = req.firstName
+        user.first_name = req.firstName
     if req.lastName is not None:
-        user.lastName = req.lastName
+        user.last_name = req.lastName
     if req.phone is not None:
         user.phone = req.phone
     db.commit()

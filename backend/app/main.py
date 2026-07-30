@@ -62,16 +62,21 @@ def seed_database(db: Session):
     from app.models import Role, Department, User, Agent, ComplaintCategory, SLARule, RecommendedSolution
     
     # 1. Seed Roles
-    roles_list = ["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_AGENT", "ROLE_CUSTOMER"]
+    roles_list = [
+        {"id": 1, "name": "ROLE_ADMIN"},
+        {"id": 2, "name": "ROLE_MANAGER"},
+        {"id": 3, "name": "ROLE_AGENT"},
+        {"id": 4, "name": "ROLE_CUSTOMER"}
+    ]
     role_map = {}
-    for r_name in roles_list:
-        role = db.query(Role).filter(Role.name == r_name).first()
+    for r_data in roles_list:
+        role = db.query(Role).filter(Role.name == r_data["name"]).first()
         if not role:
-            role = Role(name=r_name)
+            role = Role(id=r_data["id"], name=r_data["name"])
             db.add(role)
             db.commit()
             db.refresh(role)
-        role_map[r_name] = role
+        role_map[r_data["name"]] = role
 
     # 2. Seed Departments
     depts = [
@@ -110,8 +115,8 @@ def seed_database(db: Session):
                 username=u["username"],
                 password=hash_password(u["pwd"]),
                 email=u["email"],
-                firstName=u["first"],
-                lastName=u["last"],
+                first_name=u["first"],
+                last_name=u["last"],
                 department_id=u["dept"]
             )
             for r_name in u["roles"]:

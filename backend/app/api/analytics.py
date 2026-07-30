@@ -89,7 +89,7 @@ def get_agents_workload(db: Session = Depends(get_db)):
     results = []
     for a in agents:
         results.append({
-            "agentName": f"{a.user.firstName or ''} {a.user.lastName or ''}".strip() or a.user.username,
+            "agentName": f"{a.user.first_name or ''} {a.user.last_name or ''}".strip() or a.user.username,
             "email": a.user.email,
             "activeCount": a.current_complaints_count,
             "status": a.status

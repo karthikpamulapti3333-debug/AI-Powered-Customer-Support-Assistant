@@ -1,5 +1,5 @@
-from sqlalchemy import Table, Column, String, Integer, Double, Boolean, DateTime, ForeignKey, Text, Table
-from sqlalchemy.types import BIGINT
+from sqlalchemy import Table, Column, String, Integer, Double, Boolean, DateTime, ForeignKey, Text
+BIGINT = Integer
 from sqlalchemy.orm import relationship
 import datetime
 from app.config.database import Base
