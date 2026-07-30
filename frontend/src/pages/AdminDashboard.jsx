@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Users, FolderTree, ShieldAlert, Lightbulb, Clock, Plus, Trash2, Edit3, Save, X, RefreshCw, FileText, Upload, AlertCircle
 } from 'lucide-react';
-import { adminService, authService } from '../services/api';
+import api, { adminService, authService } from '../services/api';
 
 export default function AdminDashboard() {
   const location = useLocation();
@@ -66,8 +66,6 @@ export default function AdminDashboard() {
     setLoading(true);
     setError('');
     setSuccess('');
-    const token = localStorage.getItem('token');
-    const headers = { 'Authorization': `Bearer ${token}` };
     try {
       if (activeTab === 'users') {
         const u = await adminService.getUsers();
@@ -88,19 +86,16 @@ export default function AdminDashboard() {
         setCatsList(c);
         
         // Load RAG documents
-        const docs = await fetch('/api/knowledge/documents', { headers })
-          .then(res => res.ok ? res.json() : []);
+        const docs = await api.get('/knowledge/documents').then(r => r.data).catch(() => []);
         setKbDocsList(docs);
       } else if (activeTab === 'sla') {
         const s = await adminService.getSlaRules();
         setSlaList(s);
       } else if (activeTab === 'gaps') {
-        const gaps = await fetch('/api/admin/knowledge-gaps', { headers })
-          .then(res => res.ok ? res.json() : []);
+        const gaps = await api.get('/admin/knowledge-gaps').then(r => r.data).catch(() => []);
         setGapsList(gaps);
       } else if (activeTab === 'logs') {
-        const logs = await fetch('/api/admin/audit-logs', { headers })
-          .then(res => res.ok ? res.json() : []);
+        const logs = await api.get('/admin/audit-logs').then(r => r.data).catch(() => []);
         setAuditLogs(logs);
       }
     } catch (err) {
@@ -247,24 +242,18 @@ export default function AdminDashboard() {
     setUploadingFile(true);
     setError('');
     setSuccess('');
-    const token = localStorage.getItem('token');
     const formData = new FormData();
     formData.append('file', fileToUpload);
     formData.append('category', kbCategory);
     try {
-      const res = await fetch('/api/knowledge/documents/upload', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
-        body: formData
+      const res = await api.post('/knowledge/documents/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
-      if (res.ok) {
+      if (res.status === 200 || res.status === 201) {
         setSuccess('Document successfully parsed, chunked, and RAG indexed.');
         setFileToUpload(null);
-        // Reset form
         e.target.reset();
-        // Reload documents
-        const docs = await fetch('/api/knowledge/documents', { headers: { 'Authorization': `Bearer ${token}` } })
-          .then(r => r.ok ? r.json() : []);
+        const docs = await api.get('/knowledge/documents').then(r => r.data).catch(() => []);
         setKbDocsList(docs);
       } else {
         setError('Failed to process and index document.');
@@ -281,42 +270,26 @@ export default function AdminDashboard() {
     if (!confirm('Are you sure you want to delete this document? All associated vector database search chunks will be permanently purged.')) return;
     setError('');
     setSuccess('');
-    const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`/api/knowledge/documents/${docId}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
-        setSuccess('Document purged from knowledge catalog.');
-        setKbDocsList(kbDocsList.filter(d => d.id !== docId));
-      } else {
-        setError('Failed to delete document.');
-      }
+      await api.delete(`/knowledge/documents/${docId}`);
+      setSuccess('Document purged from knowledge catalog.');
+      setKbDocsList(kbDocsList.filter(d => d.id !== docId));
     } catch (err) {
       console.error(err);
-      setError('Connection failure.');
+      setError('Failed to delete document.');
     }
   };
 
   const handleResolveGap = async (gapId) => {
     setError('');
     setSuccess('');
-    const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`/api/admin/knowledge-gaps/${gapId}/resolve`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
-        setSuccess('Knowledge gap marked resolved.');
-        setGapsList(gapsList.map(g => g.id === gapId ? { ...g, resolved: true } : g));
-      } else {
-        setError('Failed to resolve knowledge gap.');
-      }
+      await api.post(`/admin/knowledge-gaps/${gapId}/resolve`);
+      setSuccess('Knowledge gap marked resolved.');
+      setGapsList(gapsList.map(g => g.id === gapId ? { ...g, resolved: true } : g));
     } catch (err) {
       console.error(err);
-      setError('Connection failure.');
+      setError('Failed to resolve knowledge gap.');
     }
   };
 
@@ -324,20 +297,12 @@ export default function AdminDashboard() {
     setError('');
     setSuccess('');
     setLoading(true);
-    const token = localStorage.getItem('token');
     try {
-      const res = await fetch('/api/knowledge/reindex', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
-        setSuccess('Full RAG database reindexing complete.');
-      } else {
-        setError('Reindexing failed.');
-      }
+      await api.post('/knowledge/reindex');
+      setSuccess('Full RAG database reindexing complete.');
     } catch (err) {
       console.error(err);
-      setError('Connection failure.');
+      setError('Reindexing failed.');
     } finally {
       setLoading(false);
     }

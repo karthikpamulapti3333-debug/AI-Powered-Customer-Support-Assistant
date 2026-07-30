@@ -150,6 +150,13 @@ def seed_database(db: Session):
                     )
                     db.add(agent)
                     db.commit()
+        else:
+            # Force update password for demo account stability
+            user.password = hash_password(u["pwd"])
+            for r_name in u["roles"]:
+                if role_map[r_name] not in user.roles:
+                    user.roles.append(role_map[r_name])
+            db.commit()
 
     # 4. Seed Complaint Categories
     categories = [

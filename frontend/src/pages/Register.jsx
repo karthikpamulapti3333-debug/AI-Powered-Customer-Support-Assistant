@@ -67,7 +67,8 @@ export default function Register() {
       }, 2000);
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || 'Registration failed. Please check your details.');
+      const serverDetail = err.response?.data?.detail || err.response?.data?.message;
+      setError(serverDetail || 'Registration failed. Please check your details.');
     } finally {
       setLoading(false);
     }

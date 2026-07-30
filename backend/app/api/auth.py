@@ -59,8 +59,12 @@ def register(req: RegisterRequest, db: Session = Depends(get_db)):
     if db.query(User).filter(User.email == req.email).first():
         raise HTTPException(status_code=400, detail="Email is already in use")
 
-    # Fetch role
-    role_name = req.role if req.role in ["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_AGENT", "ROLE_CUSTOMER"] else "ROLE_CUSTOMER"
+    # Format role name
+    r_input = req.role.strip().upper() if req.role else "ROLE_CUSTOMER"
+    if not r_input.startswith("ROLE_"):
+        r_input = f"ROLE_{r_input}"
+    
+    role_name = r_input if r_input in ["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_AGENT", "ROLE_CUSTOMER"] else "ROLE_CUSTOMER"
     role_obj = db.query(Role).filter(Role.name == role_name).first()
     if not role_obj:
         role_obj = Role(name=role_name)

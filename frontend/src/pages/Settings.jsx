@@ -3,7 +3,7 @@ import {
   User, Key, Bell, SunMoon, MessageSquare, ShieldCheck, 
   Eye, EyeOff, Save, Trash2, ShieldAlert, Upload, RefreshCw, Clock
 } from 'lucide-react';
-import { authService, adminService } from '../services/api';
+import api, { authService, adminService } from '../services/api';
 
 export default function Settings({ user, setUser, theme, toggleTheme }) {
   const [activeTab, setActiveTab] = useState('profile');
@@ -79,10 +79,7 @@ export default function Settings({ user, setUser, theme, toggleTheme }) {
     try {
       const sla = await adminService.getSlaRules();
       setSlaList(sla);
-      const token = localStorage.getItem('token');
-      const docs = await fetch('/api/knowledge/documents', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      }).then(res => res.ok ? res.json() : []);
+      const docs = await api.get('/knowledge/documents').then(r => r.data).catch(() => []);
       setKbDocsList(docs);
     } catch (err) {
       console.error(err);
