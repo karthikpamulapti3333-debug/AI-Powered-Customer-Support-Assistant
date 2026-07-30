@@ -40,9 +40,10 @@ export default function Login({ setUser }) {
       window.location.href = targetPath;
     } catch (err) {
       console.error(err);
+      const serverDetail = err.response?.data?.detail || err.response?.data?.message;
       setError(
-        err.response?.data?.message || 
-        'Authentication failed. Please verify your credentials.'
+        serverDetail || 
+        'Authentication failed. Please check your credentials or backend connection.'
       );
     } finally {
       setLoading(false);

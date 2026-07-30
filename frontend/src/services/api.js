@@ -1,7 +1,13 @@
 import axios from 'axios';
 
-// Vite dev server proxies /api to http://localhost:8080/api
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+let rawApiUrl = import.meta.env.VITE_API_URL || '/api';
+if (typeof rawApiUrl === 'string') {
+  rawApiUrl = rawApiUrl.trim().replace(/\/+$/, '');
+  if (rawApiUrl.startsWith('http') && !rawApiUrl.endsWith('/api')) {
+    rawApiUrl += '/api';
+  }
+}
+const API_URL = rawApiUrl;
 
 const api = axios.create({
   baseURL: API_URL,
