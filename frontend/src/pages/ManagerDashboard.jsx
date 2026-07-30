@@ -20,6 +20,14 @@ export default function ManagerDashboard() {
   
   // Full Queue States
   const [allComplaints, setAllComplaints] = useState([]);
+
+  const safeAllComplaints = Array.isArray(allComplaints) ? allComplaints : [];
+  const safeHighRiskTickets = Array.isArray(highRiskTickets) ? highRiskTickets : [];
+  const safeCategoriesData = Array.isArray(categoriesData) ? categoriesData : [];
+  const safePriorityData = Array.isArray(priorityData) ? priorityData : [];
+  const safeSlaData = Array.isArray(slaData) ? slaData : [];
+  const safeAgentData = Array.isArray(agentData) ? agentData : [];
+  const safeTrendsData = Array.isArray(trendsData) ? trendsData : [];
   const [statusFilter, setStatusFilter] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -66,11 +74,11 @@ export default function ManagerDashboard() {
 
       // 7. Load high-risk complaints for manager monitor panel
       const complaints = await complaintService.getComplaints({ escalationStatus: 'HIGH_RISK' });
-      setHighRiskTickets(complaints);
+      setHighRiskTickets(Array.isArray(complaints) ? complaints : []);
       
       // 8. Load all complaints for the full queue view
       const allComps = await complaintService.getComplaints();
-      setAllComplaints(allComps);
+      setAllComplaints(Array.isArray(allComps) ? allComps : []);
       
     } catch (err) {
       console.error(err);
@@ -92,7 +100,7 @@ export default function ManagerDashboard() {
   const showDashboardDefault = !showQueueOnly && !showChartsOnly;
 
   // Filter queue
-  const filteredTickets = allComplaints.filter(t => {
+  const filteredTickets = safeAllComplaints.filter(t => {
     const matchesStatus = !statusFilter || t.status === statusFilter;
     const matchesPriority = !priorityFilter || t.priority === priorityFilter;
     const matchesSearch = !searchTerm || 
@@ -319,7 +327,7 @@ export default function ManagerDashboard() {
                           paddingAngle={5}
                           dataKey="value"
                         >
-                          {slaData.map((entry, index) => (
+                          {safeSlaData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.name === 'On Time' ? '#10b981' : entry.name === 'Breached' ? '#ef4444' : '#f59e0b'} />
                           ))}
                         </Pie>
@@ -338,7 +346,7 @@ export default function ManagerDashboard() {
                   <div className="glassmorphism p-6 rounded-3xl border border-slate-800 shadow-lg">
                     <h3 className="font-bold text-slate-200 text-sm mb-4">Complaints by Business Area</h3>
                     <div className="h-64">
-                      {categoriesData.length === 0 ? (
+                      {safeCategoriesData.length === 0 ? (
                         <div className="h-full flex items-center justify-center text-slate-500 text-xs">No classification data.</div>
                       ) : (
                         <ResponsiveContainer width="100%" height="100%">
@@ -352,7 +360,7 @@ export default function ManagerDashboard() {
                               label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                               labelLine={false}
                             >
-                              {categoriesData.map((entry, index) => (
+                              {safeCategoriesData.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                               ))}
                             </Pie>
@@ -367,7 +375,7 @@ export default function ManagerDashboard() {
                   <div className="glassmorphism p-6 rounded-3xl border border-slate-800 shadow-lg">
                     <h3 className="font-bold text-slate-200 text-sm mb-4">Agent Workload Balancer</h3>
                     <div className="h-64">
-                      {agentData.length === 0 ? (
+                      {safeAgentData.length === 0 ? (
                         <div className="h-full flex items-center justify-center text-slate-500 text-xs">No active support agents.</div>
                       ) : (
                         <ResponsiveContainer width="100%" height="100%">
@@ -400,7 +408,7 @@ export default function ManagerDashboard() {
                 <p className="text-slate-500 text-xs mt-1">AI flagged these tickets as containing severe risk of escalation or SLA breach.</p>
               </div>
 
-              {highRiskTickets.length === 0 ? (
+              {safeHighRiskTickets.length === 0 ? (
                 <div className="p-16 text-center text-slate-500 text-xs">
                   No high-risk escalations currently pending.
                 </div>
@@ -418,7 +426,7 @@ export default function ManagerDashboard() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/60">
-                      {highRiskTickets.map((t) => (
+                      {safeHighRiskTickets.map((t) => (
                         <tr 
                           key={t.id} 
                           onClick={() => navigate(`/manager/complaints/${t.id}`)}

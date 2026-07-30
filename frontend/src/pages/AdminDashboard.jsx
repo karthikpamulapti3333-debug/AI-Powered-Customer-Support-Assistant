@@ -47,6 +47,16 @@ export default function AdminDashboard() {
   const [kbDocsList, setKbDocsList] = useState([]);
   const [gapsList, setGapsList] = useState([]);
   const [auditLogs, setAuditLogs] = useState([]);
+
+  const safeUsersList = Array.isArray(usersList) ? usersList : [];
+  const safeAgentsList = Array.isArray(agentsList) ? agentsList : [];
+  const safeDeptsList = Array.isArray(deptsList) ? deptsList : [];
+  const safeCatsList = Array.isArray(catsList) ? catsList : [];
+  const safeSolutionsList = Array.isArray(solutionsList) ? solutionsList : [];
+  const safeSlaList = Array.isArray(slaList) ? slaList : [];
+  const safeKbDocsList = Array.isArray(kbDocsList) ? kbDocsList : [];
+  const safeGapsList = Array.isArray(gapsList) ? gapsList : [];
+  const safeAuditLogs = Array.isArray(auditLogs) ? auditLogs : [];
   
   // File Upload states
   const [fileToUpload, setFileToUpload] = useState(null);
@@ -69,28 +79,28 @@ export default function AdminDashboard() {
     try {
       if (activeTab === 'users') {
         const u = await adminService.getUsers();
-        setUsersList(u);
+        setUsersList(Array.isArray(u) ? u : []);
         const a = await adminService.getAgents();
-        setAgentsList(a);
+        setAgentsList(Array.isArray(a) ? a : []);
         const d = await adminService.getDepartments();
-        setDeptsList(d);
+        setDeptsList(Array.isArray(d) ? d : []);
       } else if (activeTab === 'depts') {
         const d = await adminService.getDepartments();
-        setDeptsList(d);
+        setDeptsList(Array.isArray(d) ? d : []);
         const c = await adminService.getCategories();
-        setCatsList(c);
+        setCatsList(Array.isArray(c) ? c : []);
       } else if (activeTab === 'solutions') {
         const s = await adminService.getSolutions();
-        setSolutionsList(s);
+        setSolutionsList(Array.isArray(s) ? s : []);
         const c = await adminService.getCategories();
-        setCatsList(c);
+        setCatsList(Array.isArray(c) ? c : []);
         
         // Load RAG documents
         const docs = await api.get('/knowledge/documents').then(r => r.data).catch(() => []);
         setKbDocsList(docs);
       } else if (activeTab === 'sla') {
         const s = await adminService.getSlaRules();
-        setSlaList(s);
+        setSlaList(Array.isArray(s) ? s : []);
       } else if (activeTab === 'gaps') {
         const gaps = await api.get('/admin/knowledge-gaps').then(r => r.data).catch(() => []);
         setGapsList(gaps);
@@ -286,7 +296,7 @@ export default function AdminDashboard() {
     try {
       await api.post(`/admin/knowledge-gaps/${gapId}/resolve`);
       setSuccess('Knowledge gap marked resolved.');
-      setGapsList(gapsList.map(g => g.id === gapId ? { ...g, resolved: true } : g));
+      setGapsList(safeGapsList.map(g => g.id === gapId ? { ...g, resolved: true } : g));
     } catch (err) {
       console.error(err);
       setError('Failed to resolve knowledge gap.');
@@ -487,7 +497,7 @@ export default function AdminDashboard() {
                           required
                         >
                           <option value="">Select...</option>
-                          {deptsList.map(d => (
+                          {safeDeptsList.map(d => (
                             <option key={d.id} value={d.id}>{d.name}</option>
                           ))}
                         </select>
@@ -517,7 +527,7 @@ export default function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/40">
-                      {usersList.map(u => (
+                      {safeUsersList.map(u => (
                         <tr key={u.id} className="hover:bg-slate-800/20">
                           <td className="py-2.5 px-4 font-bold text-slate-200">
                             {u.username} <span className="text-[10px] text-slate-500 font-normal">({u.firstName} {u.lastName})</span>
@@ -572,7 +582,7 @@ export default function AdminDashboard() {
                   </button>
                 </form>
                 <div className="max-h-80 overflow-y-auto divide-y divide-slate-200 dark:divide-slate-800/40 text-slate-700 dark:text-slate-300">
-                  {deptsList.map(d => (
+                  {safeDeptsList.map(d => (
                     <div key={d.id} className="py-2.5 flex justify-between items-center text-xs">
                       <div>
                         <div className="font-bold text-slate-800 dark:text-slate-200">{d.name}</div>
@@ -624,7 +634,7 @@ export default function AdminDashboard() {
                   </div>
                 </form>
                 <div className="max-h-72 overflow-y-auto divide-y divide-slate-200 dark:divide-slate-800/40 text-slate-700 dark:text-slate-300">
-                  {catsList.map(c => (
+                  {safeCatsList.map(c => (
                     <div key={c.id} className="py-2.5 flex justify-between items-center text-xs">
                       <div>
                         <div className="font-bold text-slate-800 dark:text-slate-200">{c.displayName} <span className="text-[10px] text-slate-500 font-mono">({c.name})</span></div>
@@ -743,7 +753,7 @@ export default function AdminDashboard() {
                           className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl py-1.5 px-1 text-[10px] text-slate-800 dark:text-slate-200 focus:outline-none"
                         >
                           <option value="">Select...</option>
-                          {catsList.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+                          {safeCatsList.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
                         </select>
                       </div>
                       <div>
@@ -810,7 +820,7 @@ export default function AdminDashboard() {
                             <td colSpan="4" className="py-6 text-center text-slate-500 text-xs">No documents uploaded for RAG matching.</td>
                           </tr>
                         ) : (
-                          kbDocsList.map(doc => (
+                          safeKbDocsList.map(doc => (
                             <tr key={doc.id} className="hover:bg-slate-800/10">
                               <td className="py-2.5 px-4 font-bold text-slate-200">{doc.fileName}</td>
                               <td className="py-2.5 px-4 font-mono text-[10px] text-indigo-400 font-bold">{doc.category}</td>
@@ -838,7 +848,7 @@ export default function AdminDashboard() {
                     {solutionsList.length === 0 ? (
                       <div className="text-center py-6 text-slate-550 text-xs">No manual playbooks defined.</div>
                     ) : (
-                      solutionsList.map(s => (
+                      safeSolutionsList.map(s => (
                         <div key={s.id} className="p-4 bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl flex justify-between items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
                           <div className="space-y-1">
                             <div className="font-bold text-xs text-slate-800 dark:text-slate-200">{s.title}</div>
@@ -893,7 +903,7 @@ export default function AdminDashboard() {
                         <td colSpan="5" className="py-8 text-center text-slate-550 text-xs">No knowledge gaps detected in support sessions.</td>
                       </tr>
                     ) : (
-                      gapsList.map(g => (
+                      safeGapsList.map(g => (
                         <tr key={g.id} className="hover:bg-slate-800/10">
                           <td className="py-3 px-4 text-slate-200 italic">"{g.queryText}"</td>
                           <td className="py-3 px-4 font-bold text-amber-500 font-mono text-[10px]">{g.reason}</td>
@@ -954,7 +964,7 @@ export default function AdminDashboard() {
                         <td colSpan="5" className="py-8 text-center text-slate-550 text-xs">No audit transactions found.</td>
                       </tr>
                     ) : (
-                      auditLogs.map(l => (
+                      safeAuditLogs.map(l => (
                         <tr key={l.id} className="hover:bg-slate-800/10">
                           <td className="py-3 px-4 text-slate-450 font-mono">
                             {new Date(l.createdAt).toLocaleString()}
@@ -987,7 +997,7 @@ export default function AdminDashboard() {
               <p className="text-slate-500 dark:text-slate-400 text-xs">Configure the maximum duration allotted for resolving support tickets by priority tier.</p>
               
               <div className="space-y-4 pt-2">
-                {slaList.map((rule, idx) => (
+                {safeSlaList.map((rule, idx) => (
                   <div key={rule.id} className="p-4 bg-slate-105 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-between gap-4">
                     <span className="font-bold text-xs text-slate-800 dark:text-slate-200 w-24">{rule.priority}</span>
                     <div className="flex items-center gap-4 text-xs">
