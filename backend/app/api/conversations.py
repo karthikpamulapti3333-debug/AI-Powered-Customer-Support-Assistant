@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from typing import List, Optional
 import datetime
 from app.config.database import get_db
 from app.models import User, Conversation, Message, KnowledgeGap
@@ -15,6 +16,30 @@ router = APIRouter(prefix="/api/conversations", tags=["Conversations"])
 class MessageSendRequest(BaseModel):
     messageText: str
 
+class FeedbackRequestDto(BaseModel):
+    rating: int
+    comment: Optional[str] = None
+
+@router.get("")
+def list_conversations(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    user_roles = [r.name for r in user.roles]
+    query = db.query(Conversation)
+    
+    # Non-admin, non-manager, non-agents get only their own conversations
+    if "ROLE_ADMIN" not in user_roles and "ROLE_MANAGER" not in user_roles and "ROLE_AGENT" not in user_roles:
+        query = query.filter(Conversation.customer_id == user.id)
+        
+    conversations = query.order_by(Conversation.updated_at.desc()).all()
+    results = []
+    for c in conversations:
+        results.append({
+            "id": c.id,
+            "status": c.status,
+            "createdAt": c.created_at,
+            "updatedAt": c.updated_at
+        })
+    return results
+
 @router.post("")
 def start_or_get_conversation(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     # Find active conversation
@@ -24,9 +49,12 @@ def start_or_get_conversation(user: User = Depends(get_current_user), db: Sessio
     ).order_by(Conversation.created_at.desc()).first()
 
     if not conv:
+        now = datetime.datetime.utcnow()
         conv = Conversation(
             customer_id=user.id,
-            status="ACTIVE"
+            status="ACTIVE",
+            created_at=now,
+            updated_at=now
         )
         db.add(conv)
         db.commit()
@@ -42,11 +70,18 @@ def start_or_get_conversation(user: User = Depends(get_current_user), db: Sessio
         )
         db.add(greeting)
         db.commit()
+    else:
+        # Update timestamp to bring it to top of dashboard list
+        conv.updated_at = datetime.datetime.utcnow()
+        db.add(conv)
+        db.commit()
+        db.refresh(conv)
 
     return {
         "id": conv.id,
         "status": conv.status,
-        "createdAt": conv.created_at
+        "createdAt": conv.created_at,
+        "updatedAt": conv.updated_at
     }
 
 @router.get("/{id}/messages")
@@ -64,6 +99,7 @@ def get_messages(id: int, user: User = Depends(get_current_user), db: Session = 
             "messageText": m.message_text,
             "isAi": m.is_ai,
             "sentiment": m.sentiment,
+            "intent": m.intent,
             "requiresHuman": m.requires_human,
             "sources": m.sources.split(",") if m.sources else [],
             "createdAt": m.created_at
@@ -128,15 +164,17 @@ def send_message(id: int, req: MessageSendRequest, user: User = Depends(get_curr
         is_ai=True,
         sources=sources_str,
         sentiment="POSITIVE",
+        intent=ai_cls["intent"],
         requires_human=user_msg.requires_human
     )
     db.add(ai_msg)
     
-    # If customer query requires human, flag conversation status
+    # Update conversation status and timestamp
     if user_msg.requires_human:
         conv.status = "COMPLAINT_CREATED"
-        db.add(conv)
-        
+    
+    conv.updated_at = datetime.datetime.utcnow()
+    db.add(conv)
     db.commit()
     db.refresh(ai_msg)
 
@@ -145,10 +183,38 @@ def send_message(id: int, req: MessageSendRequest, user: User = Depends(get_curr
         "senderRole": ai_msg.sender_role,
         "messageText": ai_msg.message_text,
         "isAi": ai_msg.is_ai,
+        "intent": ai_msg.intent,
         "requiresHuman": ai_msg.requires_human,
         "sources": ai_reply["sources"],
         "createdAt": ai_msg.created_at
     }
+
+@router.post("/{id}/feedback")
+def submit_feedback(id: int, req: FeedbackRequestDto, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    conv = db.query(Conversation).filter(Conversation.id == id).first()
+    if not conv:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+        
+    conv.status = "RESOLVED"
+    conv.updated_at = datetime.datetime.utcnow()
+    db.add(conv)
+    db.commit()
+    return {"message": "Feedback submitted successfully"}
+
+@router.delete("/{id}")
+def delete_conversation(id: int, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    conv = db.query(Conversation).filter(Conversation.id == id).first()
+    if not conv:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    
+    user_roles = [r.name for r in user.roles]
+    if "ROLE_ADMIN" not in user_roles and "ROLE_MANAGER" not in user_roles and "ROLE_AGENT" not in user_roles:
+        if conv.customer_id != user.id:
+            raise HTTPException(status_code=403, detail="Forbidden")
+            
+    db.delete(conv)
+    db.commit()
+    return {"message": "Conversation deleted successfully"}
 
 @router.put("/{id}/resolve")
 def resolve_conversation(id: int, db: Session = Depends(get_db)):
@@ -156,6 +222,8 @@ def resolve_conversation(id: int, db: Session = Depends(get_db)):
     if not conv:
         raise HTTPException(status_code=404, detail="Conversation not found")
     conv.status = "RESOLVED"
+    conv.updated_at = datetime.datetime.utcnow()
+    db.add(conv)
     db.commit()
     return {"message": "Conversation marked as resolved"}
 
@@ -165,5 +233,7 @@ def close_conversation(id: int, db: Session = Depends(get_db)):
     if not conv:
         raise HTTPException(status_code=404, detail="Conversation not found")
     conv.status = "CLOSED"
+    conv.updated_at = datetime.datetime.utcnow()
+    db.add(conv)
     db.commit()
     return {"message": "Conversation marked as closed"}

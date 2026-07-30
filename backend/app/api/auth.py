@@ -27,9 +27,11 @@ class LoginRequest(BaseModel):
     password: str
 
 class LoginResponse(BaseModel):
-    tokenType: str = "Bearer"
-    accessToken: str
+    token: str
+    type: str = "Bearer"
+    id: int
     username: str
+    email: str
     roles: List[str]
 
 class UserProfileUpdateRequest(BaseModel):
@@ -104,8 +106,11 @@ def login(req: LoginRequest, db: Session = Depends(get_db)):
     roles = [r.name for r in user.roles]
     token = create_access_token(user.id, user.username, roles)
     return LoginResponse(
-        accessToken=token,
+        token=token,
+        type="Bearer",
+        id=user.id,
         username=user.username,
+        email=user.email,
         roles=roles
     )
 

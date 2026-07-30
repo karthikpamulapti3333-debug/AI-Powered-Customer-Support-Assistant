@@ -33,6 +33,80 @@ class FeedbackCreateRequest(BaseModel):
 class AssignAgentRequest(BaseModel):
     agentId: int
 
+def map_complaint_response(c, db: Session) -> dict:
+    analysis = db.query(ComplaintAnalysis).filter(ComplaintAnalysis.complaint_id == c.id).first()
+    
+    # Calculate SLA remaining minutes and breached status
+    sla_remaining_minutes = None
+    sla_breached = False
+    if c.sla_deadline:
+        now = datetime.datetime.utcnow()
+        delta = c.sla_deadline - now
+        sla_remaining_minutes = int(delta.total_seconds() / 60)
+        if now > c.sla_deadline and c.status not in ["RESOLVED", "CLOSED"]:
+            sla_breached = True
+            
+    # Map analysis nested DTO
+    analysis_dto = None
+    if analysis:
+        actions = []
+        if analysis.recommended_actions:
+            actions = [a.strip() for a in analysis.recommended_actions.split(",") if a.strip()]
+        analysis_dto = {
+            "category": analysis.category,
+            "intent": analysis.intent,
+            "sentiment": analysis.sentiment,
+            "priority": analysis.priority,
+            "escalationRisk": analysis.escalation_risk,
+            "rootCause": analysis.root_cause,
+            "confidenceScore": analysis.confidence_score,
+            "recommendedActions": actions,
+            "analyzedAt": analysis.analyzed_at
+        }
+        
+    return {
+        "id": c.id,
+        "title": c.title,
+        "description": c.description,
+        "status": c.status,
+        "priority": c.priority,
+        "conversationId": c.conversation_id,
+        
+        # Customer info
+        "customerId": c.customer_id,
+        "customerUsername": c.customer.username if c.customer else None,
+        "customerEmail": c.customer.email if c.customer else None,
+        "customerFullName": f"{c.customer.first_name or ''} {c.customer.last_name or ''}".strip() if c.customer else None,
+        
+        # Category info
+        "categoryId": c.category_id,
+        "categoryName": c.category.name if c.category else None,
+        "categoryDisplayName": c.category.display_name if c.category else None,
+        
+        # Agent assignee info
+        "assignedAgentId": c.assigned_agent_id,
+        "assignedAgentName": f"{c.agent.user.first_name or ''} {c.agent.user.last_name or ''}".strip() or c.agent.user.username if c.agent and c.agent.user else None,
+        
+        # Department assignee info
+        "assignedDepartmentId": c.assigned_department_id,
+        "assignedDepartmentName": c.department.name if c.department else None,
+        
+        # SLA & Dates
+        "createdAt": c.created_at,
+        "updatedAt": c.updated_at,
+        "resolvedAt": c.resolved_at,
+        "closedAt": c.closed_at,
+        "slaDeadline": c.sla_deadline,
+        "escalationStatus": c.escalation_status,
+        
+        # Derived SLA statuses
+        "slaRemainingMinutes": sla_remaining_minutes,
+        "slaBreached": sla_breached,
+        
+        # AI Analysis
+        "analysis": analysis_dto
+    }
+
 @router.post("")
 def create_complaint(req: ComplaintCreateRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     # 1. Run AI analysis
@@ -140,18 +214,7 @@ def create_complaint(req: ComplaintCreateRequest, user: User = Depends(get_curre
     db.commit()
 
     # Re-fetch for response structure
-    return {
-        "id": complaint.id,
-        "title": complaint.title,
-        "description": complaint.description,
-        "status": complaint.status,
-        "priority": complaint.priority,
-        "createdAt": complaint.created_at,
-        "assignedAgent": {
-            "id": assigned_agent.id,
-            "username": assigned_agent.user.username
-        } if assigned_agent else None
-    }
+    return map_complaint_response(complaint, db)
 
 @router.get("")
 def get_complaints(
@@ -197,38 +260,7 @@ def get_complaints(
         query = query.filter(Complaint.escalation_status == escalationStatus)
 
     complaints_list = query.order_by(Complaint.created_at.desc()).all()
-    results = []
-    for c in complaints_list:
-        results.append({
-            "id": c.id,
-            "title": c.title,
-            "description": c.description,
-            "status": c.status,
-            "priority": c.priority,
-            "createdAt": c.created_at,
-            "customer": {
-                "id": c.customer.id,
-                "username": c.customer.username,
-                "email": c.customer.email
-            } if c.customer else None,
-            "category": {
-                "id": c.category.id,
-                "name": c.category.name,
-                "displayName": c.category.display_name
-            } if c.category else None,
-            "assignedAgent": {
-                "id": c.agent.id,
-                "username": c.agent.user.username,
-                "email": c.agent.user.email
-            } if c.agent and c.agent.user else None,
-            "assignedDepartment": {
-                "id": c.department.id,
-                "name": c.department.name
-            } if c.department else None,
-            "escalationStatus": c.escalation_status,
-            "slaDeadline": c.sla_deadline
-        })
-    return results
+    return [map_complaint_response(c, db) for c in complaints_list]
 
 @router.get("/{id}")
 def get_complaint_by_id(id: int, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -251,49 +283,7 @@ def get_complaint_by_id(id: int, user: User = Depends(get_current_user), db: Ses
     feedback = db.query(CustomerFeedback).filter(CustomerFeedback.complaint_id == c.id).first()
     analysis = db.query(ComplaintAnalysis).filter(ComplaintAnalysis.complaint_id == c.id).first()
 
-    return {
-        "id": c.id,
-        "title": c.title,
-        "description": c.description,
-        "status": c.status,
-        "priority": c.priority,
-        "createdAt": c.created_at,
-        "customer": {
-            "id": c.customer.id,
-            "username": c.customer.username,
-            "email": c.customer.email,
-            "phone": c.customer.phone
-        } if c.customer else None,
-        "category": {
-            "id": c.category.id,
-            "name": c.category.name,
-            "displayName": c.category.display_name
-        } if c.category else None,
-        "assignedAgent": {
-            "id": c.agent.id,
-            "username": c.agent.user.username if c.agent.user else "Agent"
-        } if c.agent else None,
-        "assignedDepartment": {
-            "id": c.department.id,
-            "name": c.department.name
-        } if c.department else None,
-        "escalationStatus": c.escalation_status,
-        "slaDeadline": c.sla_deadline,
-        "feedback": {
-            "rating": feedback.rating,
-            "comments": feedback.comments
-        } if feedback else None,
-        "analysis": {
-            "category": analysis.category,
-            "intent": analysis.intent,
-            "sentiment": analysis.sentiment,
-            "priority": analysis.priority,
-            "escalationRisk": analysis.escalation_risk,
-            "rootCause": analysis.root_cause,
-            "confidenceScore": analysis.confidence_score,
-            "recommendedActions": analysis.recommended_actions
-        } if analysis else None
-    }
+    return map_complaint_response(c, db)
 
 @router.put("/{id}/status")
 def update_status(id: int, req: StatusUpdateRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -337,7 +327,7 @@ def update_status(id: int, req: StatusUpdateRequest, user: User = Depends(get_cu
     db.add(notify)
     db.commit()
 
-    return {"message": "Status updated successfully", "status": c.status}
+    return map_complaint_response(c, db)
 
 @router.post("/{id}/comments")
 def add_comment(id: int, req: CommentCreateRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -487,7 +477,7 @@ def assign_agent(id: int, req: AssignAgentRequest, user: User = Depends(get_curr
     db.add(notify)
 
     db.commit()
-    return {"message": "Agent assigned successfully"}
+    return map_complaint_response(c, db)
 
 @router.post("/{id}/escalate")
 def escalate_complaint(id: int, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -521,4 +511,4 @@ def escalate_complaint(id: int, user: User = Depends(get_current_user), db: Sess
         db.add(agent_notify)
 
     db.commit()
-    return {"message": "Ticket escalated successfully", "priority": c.priority, "escalationStatus": c.escalation_status}
+    return map_complaint_response(c, db)
