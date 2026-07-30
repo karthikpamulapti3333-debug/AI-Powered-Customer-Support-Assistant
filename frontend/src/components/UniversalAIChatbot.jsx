@@ -7,8 +7,8 @@ import {
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie
 } from 'recharts';
-import { authService, analyticsService } from '../services/api';
-import axios from 'axios';
+import api, { authService, analyticsService } from '../services/api';
+
 
 export default function UniversalAIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,7 +68,7 @@ export default function UniversalAIChatbot() {
 
   const loadConversations = async () => {
     try {
-      const res = await axios.get('/api/conversations', { headers });
+      const res = await api.get('/conversations');
       setConversations(res.data);
       if (res.data.length > 0 && !currentConvId) {
         selectConversation(res.data[0].id);
@@ -84,7 +84,7 @@ export default function UniversalAIChatbot() {
     setChartVisible(false);
     setChartData(null);
     try {
-      const res = await axios.get(`/api/conversations/${id}/messages`, { headers });
+      const res = await api.get(`/conversations/${id}/messages`);
       setMessages(res.data);
     } catch (err) {
       console.error("Failed to load messages", err);
@@ -96,7 +96,7 @@ export default function UniversalAIChatbot() {
     setChartVisible(false);
     setChartData(null);
     try {
-      const res = await axios.post('/api/conversations', {}, { headers });
+      const res = await api.post('/conversations', {});
       setConversations(prev => [res.data, ...prev]);
       setCurrentConvId(res.data.id);
       setMessages([]);
@@ -111,8 +111,8 @@ export default function UniversalAIChatbot() {
     if (!confirmDelete) return;
     
     try {
-      await axios.delete(`/api/conversations/${id}`, { headers });
-      const res = await axios.get('/api/conversations', { headers });
+      await api.delete(`/conversations/${id}`);
+      const res = await api.get('/conversations');
       setConversations(res.data);
       if (id === currentConvId) {
         setMessages([]);
@@ -140,7 +140,7 @@ export default function UniversalAIChatbot() {
     let activeConvId = currentConvId;
     if (!activeConvId) {
       try {
-        const res = await axios.post('/api/conversations', {}, { headers });
+        const res = await api.post('/conversations', {});
         setConversations(prev => [res.data, ...prev]);
         activeConvId = res.data.id;
         setCurrentConvId(activeConvId);
@@ -220,14 +220,14 @@ export default function UniversalAIChatbot() {
         finalMessageText = `[CONTEXT: ticketId=${currentTicketId}, page=TICKET_DETAILS, role=${userRole}] ${text}`;
       }
 
-      const res = await axios.post(`/api/conversations/${activeConvId}/messages`, { messageText: finalMessageText }, { headers });
+      const res = await api.post(`/conversations/${activeConvId}/messages`, { messageText: finalMessageText });
       
       // Strip out context tag in frontend message state representation
       const cleanReply = { ...res.data };
       setMessages(prev => [...prev, cleanReply]);
       
       // Refresh list
-      axios.get('/api/conversations', { headers }).then(r => setConversations(r.data));
+      api.get('/conversations').then(r => setConversations(r.data));
     } catch (err) {
       console.error("Failed to send message", err);
       setErrorMessage("Service offline. Please check connection.");
@@ -240,10 +240,10 @@ export default function UniversalAIChatbot() {
     e.preventDefault();
     if (!currentConvId) return;
     try {
-      await axios.post(`/api/conversations/${currentConvId}/feedback`, {
+      await api.post(`/conversations/${currentConvId}/feedback`, {
         rating,
         comment: feedbackComment
-      }, { headers });
+      });
       setShowFeedbackModal(false);
       setFeedbackComment('');
       alert("Feedback submitted successfully!");

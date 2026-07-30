@@ -7,8 +7,8 @@ import {
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie
 } from 'recharts';
-import { authService, analyticsService } from '../services/api';
-import axios from 'axios';
+import api, { authService, analyticsService } from '../services/api';
+
 
 export default function CustomerChat() {
   const [conversations, setConversations] = useState([]);
@@ -96,7 +96,7 @@ export default function CustomerChat() {
     
     setChatLoading(true);
     try {
-      const res = await axios.post(`/api/conversations/${currentConvId}/messages`, { messageText: customerMsg.messageText }, { headers });
+      const res = await api.post(`/conversations/${currentConvId}/messages`, { messageText: customerMsg.messageText });
       setMessages(prev => {
         const filtered = prev.filter((_, idx) => idx !== msgIndex);
         return [...filtered, res.data];
@@ -115,8 +115,8 @@ export default function CustomerChat() {
     if (!confirmDelete) return;
     
     try {
-      await axios.delete(`/api/conversations/${id}`, { headers });
-      const res = await axios.get('/api/conversations', { headers });
+      await api.delete(`/conversations/${id}`);
+      const res = await api.get('/conversations');
       setConversations(res.data);
       if (id === currentConvId) {
         setMessages([]);
@@ -137,7 +137,7 @@ export default function CustomerChat() {
   const loadConversations = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('/api/conversations', { headers });
+      const res = await api.get('/conversations');
       setConversations(res.data);
       if (res.data.length > 0) {
         selectConversation(res.data[0].id);
@@ -169,7 +169,7 @@ export default function CustomerChat() {
     setChartVisible(false);
     setChartData(null);
     try {
-      const res = await axios.get(`/api/conversations/${id}/messages`, { headers });
+      const res = await api.get(`/conversations/${id}/messages`);
       setMessages(res.data);
     } catch (err) {
       console.error("Failed to load messages", err);
@@ -178,7 +178,7 @@ export default function CustomerChat() {
 
   const handleNewChat = async () => {
     try {
-      const res = await axios.post('/api/conversations', {}, { headers });
+      const res = await api.post('/conversations', {});
       setConversations(prev => [res.data, ...prev]);
       setCurrentConvId(res.data.id);
       setMessages([]);
@@ -260,9 +260,9 @@ export default function CustomerChat() {
         }
       }
 
-      const res = await axios.post(`/api/conversations/${currentConvId}/messages`, { messageText: userText }, { headers });
+      const res = await api.post(`/conversations/${currentConvId}/messages`, { messageText: userText });
       setMessages(prev => [...prev, res.data]);
-      axios.get('/api/conversations', { headers }).then(r => setConversations(r.data));
+      api.get('/conversations').then(r => setConversations(r.data));
     } catch (err) {
       console.error("Failed to post message", err);
       setErrorMessage("I'm sorry, I'm having trouble connecting to the support service right now. Please try again in a moment.");
@@ -279,10 +279,10 @@ export default function CustomerChat() {
     e.preventDefault();
     setFeedbackLoading(true);
     try {
-      await axios.post(`/api/conversations/${currentConvId}/feedback`, {
+      await api.post(`/conversations/${currentConvId}/feedback`, {
         rating,
         comment: feedbackComment
-      }, { headers });
+      });
       
       // Update local status to RESOLVED
       setConversations(prev => prev.map(c => c.id === currentConvId ? { ...c, status: 'RESOLVED' } : c));
@@ -305,12 +305,12 @@ export default function CustomerChat() {
     setChatLoading(true);
     try {
       // Send a dummy trigger to post message that escalates
-      const res = await axios.post(`/api/conversations/${currentConvId}/messages`, { 
+      const res = await api.post(`/conversations/${currentConvId}/messages`, { 
         messageText: "Please escalate this issue to a human agent and create a ticket immediately." 
-      }, { headers });
+      });
       
       setMessages(prev => [...prev, res.data]);
-      axios.get('/api/conversations', { headers }).then(r => setConversations(r.data));
+      api.get('/conversations').then(r => setConversations(r.data));
     } catch (err) {
       console.error("Escalation failed", err);
     } finally {
