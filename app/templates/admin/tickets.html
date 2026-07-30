@@ -3,12 +3,21 @@
 {% block content %}
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold text-white mb-0">Master Support Ticket Registry</h3>
+    <h3 class="fw-bold text-white mb-0"><i class="bi bi-ticket-perforated text-info me-2"></i> Master Support Ticket Registry</h3>
     <div class="d-flex gap-2">
       <a href="{{ url_for('admin.export_tickets') }}" class="btn btn-sm btn-outline-success rounded-pill">
-        <i class="bi bi-download me-1"></i> Export CSV
+        <i class="bi bi-download me-1"></i> Export CSV Report
       </a>
     </div>
+  </div>
+
+  <!-- Status Filters -->
+  <div class="mb-4 d-flex gap-2">
+    <a href="{{ url_for('tickets.list_tickets') }}" class="btn btn-sm btn-outline-light rounded-pill">All Statuses</a>
+    <a href="{{ url_for('tickets.list_tickets', status='OPEN') }}" class="btn btn-sm btn-outline-info rounded-pill">Open</a>
+    <a href="{{ url_for('tickets.list_tickets', status='IN_PROGRESS') }}" class="btn btn-sm btn-outline-warning rounded-pill">In Progress</a>
+    <a href="{{ url_for('tickets.list_tickets', status='RESOLVED') }}" class="btn btn-sm btn-outline-success rounded-pill">Resolved</a>
+    <a href="{{ url_for('tickets.list_tickets', status='CLOSED') }}" class="btn btn-sm btn-outline-secondary rounded-pill">Closed</a>
   </div>
 
   <div class="glassmorphism p-4">
@@ -17,9 +26,10 @@
         <table class="table table-dark-custom align-middle">
           <thead>
             <tr class="text-muted small">
-              <th>Code</th>
-              <th>Customer</th>
+              <th>Ticket ID</th>
+              <th>Customer Name</th>
               <th>Email</th>
+              <th>Phone</th>
               <th>Subject</th>
               <th>Category</th>
               <th>Priority</th>
@@ -33,6 +43,7 @@
                 <td class="fw-bold text-info">{{ t.ticket_code }}</td>
                 <td>{{ t.customer_name }}</td>
                 <td class="small text-muted">{{ t.email }}</td>
+                <td class="small text-muted">{{ t.phone or '-' }}</td>
                 <td>{{ t.subject }}</td>
                 <td><span class="badge bg-secondary">{{ t.category }}</span></td>
                 <td>
@@ -53,7 +64,7 @@
         </table>
       </div>
     {% else %}
-      <p class="text-muted small my-3">No tickets in system database.</p>
+      <p class="text-muted small my-3">No support tickets found matching the selected criteria.</p>
     {% endif %}
   </div>
 </div>

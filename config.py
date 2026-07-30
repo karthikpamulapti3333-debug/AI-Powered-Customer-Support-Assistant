@@ -24,7 +24,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # AI Integration Settings
+    # Configurable AI Engine Parameters
     AI_PROVIDER = os.environ.get("AI_PROVIDER", "LOCAL_SIMULATOR")
     AI_API_KEY = os.environ.get("AI_API_KEY", "")
     AI_BASE_URL = os.environ.get("AI_BASE_URL", "https://api.openai.com/v1")

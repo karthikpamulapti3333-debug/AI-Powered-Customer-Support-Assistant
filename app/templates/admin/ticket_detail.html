@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Admin Ticket {{ ticket.ticket_code }} - ResolveAI{% endblock %}
+{% block title %}Manage Ticket {{ ticket.ticket_code }} - ResolveAI Admin{% endblock %}
 {% block content %}
 <div class="container py-4">
   <div class="glassmorphism p-4 mb-4">
@@ -13,7 +13,7 @@
       
       <!-- Admin Status Updater -->
       <form action="{{ url_for('tickets.update_status', ticket_id=ticket.id) }}" method="POST" class="d-flex align-items-center gap-2">
-        <select name="status" class="form-select bg-dark text-white border-secondary form-select-sm" style="width: 140px;">
+        <select name="status" class="form-select bg-dark text-white border-secondary form-select-sm" style="width: 150px;">
           <option value="OPEN" {% if ticket.status == 'OPEN' %}selected{% endif %}>OPEN</option>
           <option value="PENDING" {% if ticket.status == 'PENDING' %}selected{% endif %}>PENDING</option>
           <option value="IN_PROGRESS" {% if ticket.status == 'IN_PROGRESS' %}selected{% endif %}>IN_PROGRESS</option>
@@ -24,7 +24,12 @@
       </form>
     </div>
 
-    <p class="text-muted small">Customer: <strong>{{ ticket.customer_name }}</strong> ({{ ticket.email }}) | Date: {{ ticket.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    <div class="row g-3 mb-3 text-muted small">
+      <div class="col-md-4"><i class="bi bi-person text-info me-1"></i> <strong>Name:</strong> {{ ticket.customer_name }}</div>
+      <div class="col-md-4"><i class="bi bi-envelope text-info me-1"></i> <strong>Email:</strong> {{ ticket.email }}</div>
+      <div class="col-md-4"><i class="bi bi-telephone text-info me-1"></i> <strong>Phone:</strong> {{ ticket.phone or 'N/A' }}</div>
+    </div>
+
     <div class="p-3 bg-dark-subtle rounded-3 border border-secondary text-white">
       {{ ticket.description }}
     </div>
@@ -32,15 +37,15 @@
 
   <!-- Replies Thread -->
   <div class="glassmorphism p-4 mb-4">
-    <h5 class="fw-bold text-white mb-4"><i class="bi bi-chat-left-text text-info me-2"></i> Responses & Admin Logs</h5>
+    <h5 class="fw-bold text-white mb-4"><i class="bi bi-chat-left-text text-info me-2"></i> Admin Replies & Activity Thread</h5>
     
     {% if ticket.replies %}
       <div class="space-y-3 mb-4">
         {% for r in ticket.replies %}
-          <div class="p-3 rounded-3 border {% if r.userRole == 'ADMIN' %}border-info bg-dark-subtle{% else %}border-secondary bg-dark{% endif %}">
+          <div class="p-3 rounded-3 border border-info bg-dark-subtle mb-3">
             <div class="d-flex justify-content-between text-muted small mb-2">
-              <span class="fw-bold {% if r.userRole == 'ADMIN' %}text-info{% else %}text-white{% endif %}">
-                {{ r.userName }} {% if r.userRole == 'ADMIN' %}(Admin){% endif %}
+              <span class="fw-bold text-info">
+                {{ r.userName }} (Admin)
               </span>
               <span>{{ r.createdAt }}</span>
             </div>
@@ -49,12 +54,12 @@
         {% endfor %}
       </div>
     {% else %}
-      <p class="text-muted small">No responses recorded yet.</p>
+      <p class="text-muted small">No responses posted for this ticket yet.</p>
     {% endif %}
 
     <form action="{{ url_for('tickets.reply_ticket', ticket_id=ticket.id) }}" method="POST">
       <div class="mb-3">
-        <label class="form-label text-muted small fw-semibold">Add Admin Response</label>
+        <label class="form-label text-muted small fw-semibold">Add Response</label>
         <textarea name="message" rows="3" class="form-control bg-dark text-white border-secondary" required placeholder="Type support response to customer..."></textarea>
       </div>
       <button type="submit" class="btn btn-primary-gradient rounded-pill px-4">Post Admin Reply</button>

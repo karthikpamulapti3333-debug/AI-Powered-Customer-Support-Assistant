@@ -11,17 +11,12 @@ def inject_user():
 
 @kb_bp.route('/', methods=['GET'])
 def list_faqs():
-    user = get_current_user_from_jwt()
-    if user and user.role == 'ADMIN':
-        faqs = KnowledgeBase.query.order_by(KnowledgeBase.created_at.desc()).all()
-        if request.is_json:
-            return jsonify([f.to_dict() for f in faqs]), 200
-        return render_template('admin/kb.html', faqs=faqs)
-    else:
-        faqs = KnowledgeBase.query.filter_by(is_published=True).order_by(KnowledgeBase.created_at.desc()).all()
+    faqs = KnowledgeBase.query.order_by(KnowledgeBase.created_at.desc()).all()
+    if request.is_json or request.headers.get('Accept') == 'application/json':
         return jsonify([f.to_dict() for f in faqs]), 200
+    return render_template('admin/kb.html', faqs=faqs)
 
-@kb_bp.route('/', methods=['POST'])
+@kb_bp.route('/create', methods=['POST'])
 @admin_required()
 def create_faq():
     if request.is_json:
@@ -35,14 +30,15 @@ def create_faq():
         category = request.form.get('category', 'GENERAL')
 
     if not question or not answer:
+        msg = "Question and Answer fields are required."
         if request.is_json:
-            return jsonify({"error": "Question and Answer are required"}), 400
-        flash("Question and Answer are required.", "danger")
+            return jsonify({"error": msg}), 400
+        flash(msg, "danger")
         return redirect(url_for('kb.list_faqs'))
 
     faq = KnowledgeBase(
-        question=question,
-        answer=answer,
+        question=question.strip(),
+        answer=answer.strip(),
         category=category,
         is_published=True
     )
@@ -50,33 +46,9 @@ def create_faq():
     db.session.commit()
 
     if request.is_json:
-        return jsonify({"message": "FAQ created successfully", "faq": faq.to_dict()}), 201
+        return jsonify({"message": "FAQ published successfully", "faq": faq.to_dict()}), 201
 
-    flash("FAQ item created successfully!", "success")
-    return redirect(url_for('kb.list_faqs'))
-
-@kb_bp.route('/<int:faq_id>', methods=['PUT', 'POST'])
-@admin_required()
-def update_faq(faq_id):
-    faq = KnowledgeBase.query.get_or_404(faq_id)
-    if request.is_json:
-        data = request.get_json()
-        faq.question = data.get('question', faq.question)
-        faq.answer = data.get('answer', faq.answer)
-        faq.category = data.get('category', faq.category)
-        faq.is_published = data.get('isPublished', faq.is_published)
-    else:
-        faq.question = request.form.get('question', faq.question)
-        faq.answer = request.form.get('answer', faq.answer)
-        faq.category = request.form.get('category', faq.category)
-        faq.is_published = request.form.get('is_published') == 'on'
-
-    db.session.commit()
-
-    if request.is_json:
-        return jsonify({"message": "FAQ updated successfully", "faq": faq.to_dict()}), 200
-
-    flash("FAQ item updated successfully!", "success")
+    flash("FAQ published to Knowledge Base!", "success")
     return redirect(url_for('kb.list_faqs'))
 
 @kb_bp.route('/<int:faq_id>/delete', methods=['POST', 'DELETE'])
@@ -89,5 +61,5 @@ def delete_faq(faq_id):
     if request.is_json:
         return jsonify({"message": "FAQ deleted successfully"}), 200
 
-    flash("FAQ item deleted.", "info")
+    flash("FAQ removed from Knowledge Base.", "info")
     return redirect(url_for('kb.list_faqs'))

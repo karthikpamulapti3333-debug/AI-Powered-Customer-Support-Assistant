@@ -1,7 +1,6 @@
 import unittest
-from app import create_app
+from app import create_app, seed_database
 from app.extensions import db
-from app.models.user import User
 
 class AuthTestCase(unittest.TestCase):
     def setUp(self):
@@ -10,37 +9,26 @@ class AuthTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        seed_database()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
 
-    def test_registration(self):
-        res = self.client.post('/auth/register', json={
-            "email": "newcustomer@example.com",
-            "username": "newcustomer",
-            "password": "password123",
-            "firstName": "John",
-            "lastName": "Smith"
-        })
-        self.assertEqual(res.status_code, 201)
-        data = res.get_json()
-        self.assertIn("user", data)
-        self.assertEqual(data["user"]["email"], "newcustomer@example.com")
-
-    def test_login_success(self):
-        res = self.client.post('/auth/login', json={
-            "email": "customer@example.com",
-            "password": "customer123"
+    def test_admin_login_success(self):
+        res = self.client.post('/admin/login', json={
+            "email": "admin@example.com",
+            "password": "admin123"
         })
         self.assertEqual(res.status_code, 200)
         data = res.get_json()
         self.assertIn("token", data)
+        self.assertEqual(data["user"]["role"], "ADMIN")
 
-    def test_login_invalid_password(self):
-        res = self.client.post('/auth/login', json={
-            "email": "customer@example.com",
+    def test_admin_login_invalid_password(self):
+        res = self.client.post('/admin/login', json={
+            "email": "admin@example.com",
             "password": "wrongpassword"
         })
         self.assertEqual(res.status_code, 401)

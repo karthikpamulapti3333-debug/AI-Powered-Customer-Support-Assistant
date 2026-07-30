@@ -55,7 +55,7 @@ class LLMClient:
 
     def _call_openai(self, prompt, history, api_key, base_url, model):
         try:
-            messages = [{"role": "system", "content": "You are a helpful, empathetic AI Customer Support Assistant for an enterprise SaaS platform."}]
+            messages = [{"role": "system", "content": "You are a helpful, empathetic AI Customer Support Assistant for an enterprise platform."}]
             if history:
                 for h in history[-6:]:
                     role = "user" if h.get("sender") == "USER" else "assistant"
@@ -111,19 +111,19 @@ class LLMClient:
     def _local_intelligent_fallback(self, prompt: str) -> dict:
         q = prompt.lower()
         if any(w in q for w in ["hello", "hi", "hey", "greetings"]):
-            res = "Hello! 👋 Welcome to **ResolveAI** Customer Support. How can I assist you with your account, billing, or technical queries today?"
+            res = "Hello! 👋 Welcome to **ResolveAI Support**. How can I assist you today?"
             conf = 0.95
         elif any(w in q for w in ["pricing", "cost", "plan", "subscription", "price"]):
-            res = "We offer flexible subscription plans:\n- **Starter**: $29/mo (Includes basic AI routing)\n- **Pro**: $79/mo (Full AI RAG & Ticket Escalations)\n- **Enterprise**: Custom pricing\n\nWould you like to upgrade or discuss customized enterprise solutions?"
+            res = "We offer flexible plans:\n- **Starter**: $29/mo\n- **Pro**: $79/mo (Unlimited Chat & SLA Automation)\n- **Enterprise**: Custom volume pricing."
             conf = 0.90
         elif any(w in q for w in ["refund", "billing", "charge", "payment"]):
-            res = "For billing inquiries or refund requests, payments are processed within **3-5 business days**. If you experience discrepancies, you can easily open a support ticket from your **Customer Dashboard** for immediate billing audit."
+            res = "For billing inquiries or refund status, requests are processed within **3-5 business days**."
             conf = 0.85
         elif any(w in q for w in ["broken", "error", "bug", "fail", "not working", "issue"]):
-            res = "I am sorry to hear you are encountering technical difficulties. 🛠️\n\nOur system has automatically flagged this technical query. If our troubleshooting steps do not resolve the issue, I strongly recommend clicking **'Create Support Ticket'** below to notify our engineering team."
-            conf = 0.40  # Low confidence triggers ticket recommendation
+            res = "I couldn't fully resolve your issue automatically."
+            conf = 0.40  # Low confidence triggers ticket modal recommendation
         else:
-            res = "Thank you for reaching out! Our intelligent support platform processes your request. If you need dedicated human support or complex troubleshooting, please feel free to create a support ticket directly from your portal."
+            res = "Thank you for reaching out! I've analyzed your query."
             conf = 0.70
 
         return {

@@ -7,8 +7,8 @@ def export_tickets_csv():
     writer = csv.writer(output)
     
     writer.writerow([
-        "Ticket Code", "Customer Name", "Customer Email", "Subject", 
-        "Category", "Priority", "Status", "Created At", "Updated At"
+        "Ticket Code", "Customer Name", "Customer Email", "Customer Phone",
+        "Subject", "Category", "Priority", "Status", "Created At", "Updated At"
     ])
 
     tickets = Ticket.query.order_by(Ticket.created_at.desc()).all()
@@ -17,6 +17,7 @@ def export_tickets_csv():
             t.ticket_code,
             t.customer_name,
             t.email,
+            t.phone or "",
             t.subject,
             t.category,
             t.priority,
