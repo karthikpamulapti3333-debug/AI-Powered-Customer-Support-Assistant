@@ -28,15 +28,16 @@ export default function Login({ setUser }) {
       setUser(data);
 
       const roles = data.roles || [];
+      let targetPath = '/customer/dashboard';
       if (roles.includes('ROLE_ADMIN')) {
-        navigate('/admin/dashboard');
+        targetPath = '/admin/dashboard';
       } else if (roles.includes('ROLE_MANAGER')) {
-        navigate('/manager/dashboard');
+        targetPath = '/manager/dashboard';
       } else if (roles.includes('ROLE_AGENT')) {
-        navigate('/agent/dashboard');
-      } else {
-        navigate('/customer/dashboard');
+        targetPath = '/agent/dashboard';
       }
+
+      window.location.href = targetPath;
     } catch (err) {
       console.error(err);
       setError(
