@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Register - ResolveAI{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="glassmorphism p-4 p-md-5">
+        <div class="text-center mb-4">
+          <div class="fs-1 text-info"><i class="bi bi-person-plus"></i></div>
+          <h3 class="fw-bold text-white">Create Account</h3>
+          <p class="text-muted small">Join ResolveAI Customer Support Portal</p>
+        </div>
+
+        <form action="{{ url_for('auth.register') }}" method="POST">
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label text-muted small">First Name</label>
+              <input type="text" name="first_name" class="form-control bg-dark text-white border-secondary" placeholder="Jane">
+            </div>
+            <div class="col-6">
+              <label class="form-label text-muted small">Last Name</label>
+              <input type="text" name="last_name" class="form-control bg-dark text-white border-secondary" placeholder="Doe">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Username *</label>
+            <input type="text" name="username" class="form-control bg-dark text-white border-secondary" required placeholder="janedoe">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Email Address *</label>
+            <input type="email" name="email" class="form-control bg-dark text-white border-secondary" required placeholder="name@example.com">
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-muted small">Password *</label>
+            <input type="password" name="password" class="form-control bg-dark text-white border-secondary" required placeholder="Minimum 6 characters">
+          </div>
+          <button type="submit" class="btn btn-primary-gradient w-100 rounded-pill py-2.5 fw-bold">Register Account</button>
+        </form>
+
+        <div class="text-center mt-4">
+          <span class="text-muted small">Already registered? </span>
+          <a href="{{ url_for('auth.login') }}" class="text-info small fw-bold">Log in here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

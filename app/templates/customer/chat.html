@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}AI Support Chatbot - ResolveAI{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+  <div class="row g-4">
+    <!-- Chat Sidebar / History -->
+    <div class="col-md-3 d-none d-md-block">
+      <div class="glassmorphism p-3 h-100">
+        <h6 class="fw-bold text-white mb-3"><i class="bi bi-clock-history me-1"></i> Quick Shortcuts</h6>
+        <div class="d-grid gap-2">
+          <a href="{{ url_for('chat.chat_view') }}" class="btn btn-sm btn-outline-info rounded-pill text-start">
+            <i class="bi bi-plus-lg me-1"></i> New Conversation
+          </a>
+          <a href="{{ url_for('tickets.create_ticket') }}" class="btn btn-sm btn-outline-warning rounded-pill text-start">
+            <i class="bi bi-ticket-perforated me-1"></i> Create Support Ticket
+          </a>
+        </div>
+        <hr class="border-secondary my-3">
+        <p class="text-muted small">AI Chat responds with context memory, FAQ search, and markdown formatting.</p>
+      </div>
+    </div>
+
+    <!-- Main Chat Container -->
+    <div class="col-md-9">
+      <div class="glassmorphism chat-container shadow-lg">
+        <!-- Header -->
+        <div class="p-3 border-bottom border-white-10 d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fs-4 text-info"><i class="bi bi-robot"></i></span>
+            <div>
+              <h6 class="fw-bold text-white mb-0">ResolveAI Virtual Assistant</h6>
+              <span class="badge bg-success-subtle text-success small">Online & Context Ready</span>
+            </div>
+          </div>
+          <input type="hidden" id="sessionId" value="{{ session_id }}">
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+          <div class="message-bubble message-ai">
+            <div class="message-content">
+              👋 Hello! Welcome to **ResolveAI Support**. How can I help you today? Ask me about account setup, billing, or technical queries!
+            </div>
+            <div class="text-end text-muted mt-1" style="font-size: 0.7rem;">Now</div>
+          </div>
+        </div>
+
+        <!-- Input Bar -->
+        <div class="p-3 border-top border-white-10 bg-dark-subtle">
+          <div class="input-group">
+            <input type="text" id="chatInput" class="form-control bg-dark text-white border-secondary rounded-start-pill px-3" placeholder="Type your inquiry here...">
+            <button id="sendBtn" class="btn btn-primary-gradient rounded-end-pill px-4" type="button">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "ResolveAI REST API Collection",
+    "description": "Complete REST API collection for ResolveAI Customer Support & Ticket Platform.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"username\": \"newuser\",\n  \"password\": \"password123\",\n  \"firstName\": \"Alex\",\n  \"lastName\": \"Smith\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/register", "host": ["{{baseUrl}}"], "path": ["api", "register"] }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"customer@example.com\",\n  \"password\": \"customer123\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/login", "host": ["{{baseUrl}}"], "path": ["api", "login"] }
+      }
+    },
+    {
+      "name": "AI Chat - Send Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"How do I reset my billing password?\",\n  \"sessionId\": \"postman-session-001\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/chat", "host": ["{{baseUrl}}"], "path": ["api", "chat"] }
+      }
+    },
+    {
+      "name": "Tickets - Create Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"subject\": \"Postman API Integration Ticket\",\n  \"description\": \"Testing automated ticket creation via REST API.\",\n  \"category\": \"TECHNICAL\",\n  \"priority\": \"HIGH\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/tickets", "host": ["{{baseUrl}}"], "path": ["api", "tickets"] }
+      }
+    },
+    {
+      "name": "Tickets - Get List",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "url": { "raw": "{{baseUrl}}/api/tickets", "host": ["{{baseUrl}}"], "path": ["api", "tickets"] }
+      }
+    }
+  ]
+}

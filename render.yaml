@@ -1,28 +1,17 @@
 services:
-  # 1. Python FastAPI Backend Service
   - type: web
-    name: resolveai-backend
+    name: ai-customer-support-flask
     env: python
-    rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: gunicorn app:app
     envVars:
-      - key: SPRING_PROFILES_ACTIVE
-        value: dev
-      - key: JWT_SECRET
-        value: 404E635266556a586e3272357538782f413f4428472b4b6250645367566b5970
-
-  # 2. React Frontend Static Site
-  - type: web
-    name: resolveai-frontend-app
-    env: static
-    rootDir: frontend
-    buildCommand: npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: VITE_API_URL
-        value: https://resolveai-backend-6cto.onrender.com/api
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: AI_PROVIDER
+        value: LOCAL_SIMULATOR
+      - key: LLM_MODEL_NAME
+        value: gpt-3.5-turbo

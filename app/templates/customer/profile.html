@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Account Profile - ResolveAI{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="glassmorphism p-4 p-md-5">
+        <h3 class="fw-bold text-white mb-3"><i class="bi bi-person-gear text-info me-2"></i> Account Settings</h3>
+        <form action="{{ url_for('auth.profile') }}" method="POST">
+          <div class="mb-3">
+            <label class="form-label text-muted small">Username (Read-Only)</label>
+            <input type="text" class="form-control bg-dark text-muted border-secondary" value="{{ user.username }}" disabled>
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Email Address (Read-Only)</label>
+            <input type="text" class="form-control bg-dark text-muted border-secondary" value="{{ user.email }}" disabled>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label text-muted small">First Name</label>
+              <input type="text" name="first_name" class="form-control bg-dark text-white border-secondary" value="{{ user.first_name or '' }}">
+            </div>
+            <div class="col-6">
+              <label class="form-label text-muted small">Last Name</label>
+              <input type="text" name="last_name" class="form-control bg-dark text-white border-secondary" value="{{ user.last_name or '' }}">
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-muted small">New Password (Leave blank to keep unchanged)</label>
+            <input type="password" name="password" class="form-control bg-dark text-white border-secondary" placeholder="Minimum 6 characters">
+          </div>
+          <button type="submit" class="btn btn-primary-gradient w-100 rounded-pill py-2.5 fw-bold">Update Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
