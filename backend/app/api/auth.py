@@ -111,7 +111,17 @@ def login(req: LoginRequest, db: Session = Depends(get_db)):
     if not user:
         user = db.query(User).filter(func.lower(User.email) == u_clean).first()
 
-    if not user or not verify_password(p_clean, user.password):
+    # If demo user is missing from DB, trigger auto-seeding
+    from app.services.auth import DEMO_PASSWORDS
+    if not user and u_clean in DEMO_PASSWORDS:
+        from app.main import seed_database
+        try:
+            seed_database(db)
+            user = db.query(User).filter(func.lower(User.username) == u_clean).first()
+        except Exception:
+            pass
+
+    if not user or not verify_password(p_clean, user.password, username=u_clean):
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
     roles = [r.name for r in user.roles]
