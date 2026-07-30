@@ -9,6 +9,7 @@ import com.resolveai.security.JwtUtils;
 import com.resolveai.security.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +30,9 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Value("${app.frontend-url}")
+    private String frontendUrl;
 
     @Autowired
     private UserRepository userRepository;
@@ -210,7 +214,7 @@ public class AuthController {
                     .build();
             passwordResetTokenRepository.save(resetToken);
 
-            String resetLink = "http://localhost:5173/reset-password?token=" + token;
+            String resetLink = frontendUrl + "/reset-password?token=" + token;
             System.out.println("====================================================================");
             System.out.println("PASSWORD RESET REQUESTED FOR: " + user.getEmail());
             System.out.println("RESET LINK: " + resetLink);

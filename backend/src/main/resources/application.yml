@@ -23,6 +23,9 @@ app:
   ai-service:
     url: ${AI_SERVICE_URL:http://localhost:8000}
 
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
+
+
 # Swagger UI / OpenAPI configuration
 springdoc:
   api-docs:
