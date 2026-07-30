@@ -105,3 +105,6 @@ def seed_database():
         db.session.add_all(faqs)
 
     db.session.commit()
+
+# Instantiate default app instance for Gunicorn import (gunicorn app:app)
+app = create_app()
