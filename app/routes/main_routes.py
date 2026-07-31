@@ -10,9 +10,6 @@ def home():
     faqs = KnowledgeBase.query.filter_by(is_published=True).limit(4).all()
     return render_template('index.html', session_id=session_id, faqs=faqs)
 
-@main_bp.route('/portfolio')
-def portfolio():
-    return render_template('portfolio.html')
 
 @main_bp.route('/contact', methods=['GET', 'POST'])
 def contact():
