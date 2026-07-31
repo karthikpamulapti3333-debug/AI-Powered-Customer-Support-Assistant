@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Project Portfolio - ResolveAI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 mb-3 border border-primary-subtle fs-6">
+      ✨ Final-Year Engineering Portfolio
+    </span>
+    <h1 class="display-4 fw-extrabold text-white mb-2">
+      AI-Powered Customer Support & <span class="text-gradient">Ticket Management System</span>
+    </h1>
+    <p class="lead text-muted max-w-2xl mx-auto" style="max-width: 750px;">
+      A modern customer support platform combining instant unauthenticated guest AI assistance, Knowledge Base RAG retrieval, automated ticket escalation, and a single-auth Admin Console.
+    </p>
+
+    <!-- Metadata Card -->
+    <div class="glassmorphism p-4 max-w-3xl mx-auto text-start shadow-lg mt-4" style="max-width: 800px;">
+      <div class="row g-3 text-muted small">
+        <div class="col-md-6"><i class="bi bi-person text-info me-2"></i><strong>Student Name:</strong> Pamulapati Karthik</div>
+        <div class="col-md-6"><i class="bi bi-card-heading text-info me-2"></i><strong>Roll Number:</strong> 22N81A05K2</div>
+        <div class="col-md-6"><i class="bi bi-building text-info me-2"></i><strong>Department:</strong> Computer Science & Engineering (CSE)</div>
+        <div class="col-md-6"><i class="bi bi-bank text-info me-2"></i><strong>College:</strong> Sree Dattha Group of Institutions</div>
+        <div class="col-md-12"><i class="bi bi-person-badge text-info me-2"></i><strong>Project Guide:</strong> Dr. A. Ramesh Kumar (HOD & Professor)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack Grid -->
+  <div class="glassmorphism p-4 mb-5">
+    <h4 class="fw-bold text-white mb-4 text-center"><i class="bi bi-cpu text-info me-2"></i> Technology Stack</h4>
+    <div class="row g-3 text-center">
+      <div class="col-md-3">
+        <div class="p-3 bg-dark-subtle rounded-3 border border-secondary h-100">
+          <i class="bi bi-filetype-py fs-1 text-warning mb-2"></i>
+          <h6 class="fw-bold text-white">Backend</h6>
+          <span class="text-muted small">Python 3.12, Flask, Flask-SQLAlchemy, Flask-Login, Gunicorn</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-3 bg-dark-subtle rounded-3 border border-secondary h-100">
+          <i class="bi bi-code-slash fs-1 text-info mb-2"></i>
+          <h6 class="fw-bold text-white">Frontend</h6>
+          <span class="text-muted small">HTML5, CSS3, JavaScript, Bootstrap 5, Marked.js, Chart.js</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-3 bg-dark-subtle rounded-3 border border-secondary h-100">
+          <i class="bi bi-database fs-1 text-primary mb-2"></i>
+          <h6 class="fw-bold text-white">Database & ORM</h6>
+          <span class="text-muted small">SQLite (Dev), PostgreSQL (Prod), Zero-Migration Auto Schema</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-3 bg-dark-subtle rounded-3 border border-secondary h-100">
+          <i class="bi bi-cloud-upload fs-1 text-purple mb-2"></i>
+          <h6 class="fw-bold text-white">AI & Cloud</h6>
+          <span class="text-muted small">OpenAI GPT, Gemini, Ollama, Render Cloud Deployment</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Links -->
+  <div class="text-center">
+    <a href="{{ url_for('main.home') }}" class="btn btn-primary-gradient rounded-pill px-4 py-2 me-2">
+      <i class="bi bi-chat-dots-fill me-1"></i> Try Instant Guest AI Chat
+    </a>
+    <a href="{{ url_for('admin.login') }}" class="btn btn-outline-light rounded-pill px-4 py-2">
+      <i class="bi bi-shield-lock me-1"></i> Admin Portal Login
+    </a>
+  </div>
+</div>
+{% endblock %}
