@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ai-customer-support-flask
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: AI_PROVIDER
+        value: LOCAL_SIMULATOR
+      - key: LLM_MODEL_NAME
+        value: gpt-3.5-turbo
