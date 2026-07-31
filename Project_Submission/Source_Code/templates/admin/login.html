@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Admin Login - ResolveAI Console{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center py-4">
+    <div class="col-md-5">
+      <div class="glassmorphism p-4 p-md-5">
+        <div class="text-center mb-4">
+          <div class="fs-1 text-primary"><i class="bi bi-shield-lock"></i></div>
+          <h3 class="fw-bold text-white">Admin Portal Login</h3>
+          <p class="text-muted small">Restricted access to system administrators</p>
+        </div>
+
+        <form action="{{ url_for('admin.login') }}" method="POST">
+          <div class="mb-3">
+            <label class="form-label text-muted small">Admin Email or Username</label>
+            <input type="text" id="adminLoginId" name="login_id" class="form-control bg-dark text-white border-secondary" required placeholder="admin@example.com">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Password</label>
+            <input type="password" id="adminPassword" name="password" class="form-control bg-dark text-white border-secondary" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary-gradient w-100 rounded-pill py-2.5 mb-3 fw-bold">Sign In as Admin</button>
+        </form>
+
+        <!-- Pre-fill helper button -->
+        <div class="p-3 bg-dark-subtle rounded-3 border border-secondary text-center">
+          <p class="text-muted small mb-2 fw-semibold">Seed Admin Credentials</p>
+          <button class="btn btn-sm btn-outline-info rounded-pill px-3" onclick="fillAdmin('admin@example.com', 'admin123')">
+            <i class="bi bi-key me-1"></i> Fill Seed Admin (admin@example.com)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function fillAdmin(email, pwd) {
+  document.getElementById('adminLoginId').value = email;
+  document.getElementById('adminPassword').value = pwd;
+}
+</script>
+{% endblock %}
